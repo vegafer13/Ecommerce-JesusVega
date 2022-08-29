@@ -14,17 +14,17 @@ let ventaText = "";
             ventaText = `El valor de tu compra no se aplico un descuento 😪`;
         }else if (montoDeVenta >= 500 && montoDeVenta < 1500){
             descuento = 0.05;
-            ventaText = `El valor de tu compra se aplico un 5% de descuento , ahorraste por tu compra $${montoDeVenta * descuento} 🤑`; 
+            ventaText = `El valor de tu compra se aplico un 5% de descuento,\nAhorraste $${montoDeVenta * descuento} por tu compra🤑\n`; 
         }else if (montoDeVenta >= 1500 && montoDeVenta <5000){
             descuento = 0.10;
-            ventaText = `El valor de tu compra se aplico un 10% de descuento, ahorraste por tu compra $${montoDeVenta * descuento} 🤑`;
+            ventaText = `El valor de tu compra se aplico un 10% de descuento,\nAhorraste $${montoDeVenta * descuento} por tu compra🤑\n`;
         }else{
             descuento = 0.15;
-            ventaText = `El valor de tu compra se aplico un 15% de descuento, ahorraste por tu compra $${montoDeVenta * descuento} 🤑`; 
+            ventaText = `El valor de tu compra se aplico un 15% de descuento,\nAhorraste $${montoDeVenta * descuento} por tu compra🤑\n`; 
         }
 
         let montoTotal = (montoDeVenta - (montoDeVenta * descuento));
-        alert(`${ventaText}, total a pagar 🏷$${montoTotal}`);
+        alert(`${ventaText}Total a pagar 🏷$${montoTotal}`);
 
     }else{
         alert("Ingresa un valor");
