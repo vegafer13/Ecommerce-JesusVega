@@ -22,12 +22,11 @@ let ventaText = "";
             descuento = 0.15;
             ventaText = `El valor de tu compra se aplico un 15% de descuento,\nAhorraste $${montoDeVenta * descuento} por tu compra🤑\n`; 
         }
+            let montoTotal = (montoDeVenta - (montoDeVenta * descuento));
+            alert(`${ventaText}Total a pagar 🏷$${montoTotal}`);
 
-        let montoTotal = (montoDeVenta - (montoDeVenta * descuento));
-        alert(`${ventaText}Total a pagar 🏷$${montoTotal}`);
-
-    }else{
-        alert("Ingresa un valor");
+        }else{
+            alert("Ingresa un valor");
     }
     
     
