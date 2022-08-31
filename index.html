@@ -11,20 +11,29 @@
 </head>
 <header class="section-header fixed-top">
     <nav class="navbar navbar-dark navbar-expand p-0 bg-dark">
-    <div class="container-fluid">
-        <ul class="navbar-nav d-none d-md-flex mr-auto">
-            <li class="nav-item"><a class="nav-link" href="#" data-abc="true">Crea tu cuenta</a></li>
-            <li class="nav-item"><a class="nav-link" href="#" data-abc="true">Login</a></li>
-            <li class="nav-item"><a class="nav-link" href="#" data-abc="true">Tarjetas participantes</a></li>
+    <div class="container-fluid flex-column flex-md-row">
+        <ul class="navbar-nav d-md-flex mr-auto my-2 my-md-3">
+            <li class="nav-item">
+                <button type="button" onclick="registroUser()" class="btn btn-primary">Crea tu cuenta</button>
+            </li>
+            <!-- <li class="nav-item"><a class="nav-link" href="#" data-abc="true">Crea tu cuenta</a></li> -->
+            <li class="nav-item mx-3">
+                <button type="button" onclick="loginUser()" class="btn btn-primary">Login</button>
+                <!-- <a class="nav-link" href="#" data-abc="true">Login</a> -->
+            </li>
+            <li class="nav-item"><a class="nav-link d-none" href="#" data-abc="true">Tarjetas participantes</a></li>
         </ul>
-        <ul class="navbar-nav d-flex align-items-center">
+        <ul class="navbar-nav d-flex align-items-center my-2 my-md-3">
+            <li class="nav-item">
+                <a href="#" class="nav-link d-flex align-items-center" data-abc="true"><span id="saludoUser"></span></a>
+            </li>
             <li class="nav-item">
                 <div class="d-flex flex-row">
                     <img src="./assets/imagen/user.png" class="rounded-circle" width="30">
                 </div>
             </li>
             <li class="nav-item">
-                <a href="#" class="nav-link d-flex align-items-center" data-abc="true"><span>Usuario</span><i class='bx bxs-chevron-down'></i></a>
+                <a href="#" class="nav-link d-flex align-items-center" data-abc="true"><span id="textUser">Usuario</span></a>
             </li>
             
         </ul>
@@ -291,6 +300,7 @@
         <div class="container"><p class="m-0 text-center text-white">SneakersMx &copy;</p></div>
     </footer>
     <!-- Js Proyecto -->
+    <script src="./js/index.js"></script>
     <!-- <script src="./js/descuento.js"></script> -->
     <!-- <script src="./js/login.js"></script> -->
     <!-- <script src="./js/suma.js"></script> -->

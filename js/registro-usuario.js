@@ -1,6 +1,7 @@
 //Registro de newsletter
 function registroUser() {
     let nombre = prompt("Ingresa tu nombre 😀");
+    let contraseña = prompt("Ingresa tu contraseña 😀");
     let correo = "";
 
     while (nombre != undefined) {
@@ -18,6 +19,10 @@ function registroUser() {
         }
         
     }
+}
+
+
+
 
 /*     if (typeof nombre === 'string' && nombre.length > 0){
         correo = prompt("Ingresa tu correo 📧");
@@ -29,7 +34,7 @@ function registroUser() {
     }else{
         alert("Ingresa un nombre correcto 📑");
     } */
-}
+
 
 
 //Registro de newsletter
