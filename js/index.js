@@ -183,23 +183,51 @@ const baseDeDatos = [
     },
 ]
 
-let productos = document.getElementById("nombreProducto");
+let carrito = [];
 
 
 //---> Agregar productos al carrito de compra
 function carritoDeCompras(event) {
     // Añadimos el id a nuestra variable "carrito"
-    let carrito = [];
-    carrito.push(event.target.getAttribute("marcador"))
+    carrito.push(event.target.getAttribute("marcador"));
 
     console.log(carrito);
     // Actualizamos el carrito 
     renderizarCarrito();
-
 }
 
 //---- //---- Añadir productos a carrito de compra
 function renderizarCarrito(){
+    const carritoDuplicados = [...new Set(carrito)];
+    carritoDuplicados.forEach(item(element){
+        
+    });
+        
+} 
+
+
+
+
+    // const carritoSinDuplicados = [...new Set(carrito)];
+    // carritoSinDuplicados.forEach(item => {
+    //     // Obtenemos el item que necesitamos de la variable base de datos
+    //     const miItem = baseDeDatos.filter((itemBaseDatos) => {
+    //         // ¿Coincide las id? Solo puede existir un caso
+    //         return itemBaseDatos.id === parseInt(item);
+    //     });
+    // })
+    // const numeroUnidadesItem = carrito.reduce((total, itemId) => {
+    //     // ¿Coincide las id? Incremento el contador, en caso contrario no mantengo
+    //     return itemId === item ? total += 1 : total;
+    // }, 0);
+    // // Creamos el nodo del item del carrito
+    // const miNodo = document.createElement('li');
+    // miNodo.classList.add('list-group-item', 'text-right', 'mx-2');
+    // miNodo.textContent = `${numeroUnidadesItem} x ${miItem[0].nombre} - ${miItem[0].precio}${divisa}`;
+
+
+    // let id = baseDeDatos.find(item => item.id === carrito);
+    // console.log(id);
 
 
 }
