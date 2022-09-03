@@ -1,3 +1,59 @@
+//----------> Funcion seleccionar productos
+function selecccionarProductos(){
+    class Productos{
+        constructor(colorProducto, precioProducto, tallaProducto, cantidadProducto){
+            this.color = colorProducto;
+            this.precio = precioProducto;
+            this.talla = tallaProducto;
+            this.cantidad = cantidadProducto;
+        }
+    }
+
+    //Agregar productos a la cola
+    const array = [];
+    for (let index = 0; index < 1; index++) {
+        let colorProducto = prompt("Ingresa el color de tu Sneaker\nBlanco\nNegro\nGris\nCafe\nRojo\nVerde\nRosado\nAzul");
+            while(colorProducto.toLowerCase() != "blanco" && colorProducto.toLowerCase() != "negro") {
+                alert("Ingresa un color correcto")
+                colorProducto = prompt("Ingresa un color de nuestros sneakers\nBlanco\nNegro\nGris\nCafe\nRojo\nVerde\nRosado\nAzul")
+            };
+            if(colorProducto.toLowerCase() === "blanco") {
+                nuevoValor = 700;
+             }else if(colorProducto.toLowerCase() === "negro"){
+                nuevoValor = 750;
+ 
+             }else{
+                 colorProducto = prompt("Ingresa el color de tu Sneaker\nBlanco\nNegro\nGris\nCafe\nRojo\nVerde\nRosado\nAzul")
+             };
+            
+            console.log(colorProducto);
+        let precioProducto = nuevoValor;
+        let tallaProducto = prompt("Ingresa la talla de tu sneaker\n*No hay tallas medias*\n23\n24\n25\n26");
+        let cantidadProducto = prompt(`Ingresa cuantos Sneakers de color ${colorProducto} vas a comprar`)
+        let producto = new Productos(colorProducto, precioProducto, tallaProducto, cantidadProducto);
+
+
+        //> "push" para agregar un pedido a la cola
+        array.push(producto);
+    }
+        
+        
+       
+    //     for(const item of array){
+    //         //Acumular la cantidad de productos
+    //         const numeroDeProductos = array.reduce((acumulador, item) => acumulador + item.cantidad, 0);
+    //         // Cambiar texto de cantidad de productos
+    //         document.getElementById("totalProductos").textContent=(numeroDeProductos);
+            
+    //         document.getElementById("totalPrecio").textContent=(item.precio);
+    //     }
+        
+
+
+    // console.log(array);
+    
+}
+
 //----------> Funcion Registro de usuario (Button Crear cuenta)
 function registroUser() {
     //>Constructor de usuarios
@@ -121,101 +177,113 @@ function registroNewsletter() {
 }
 
 
-//------------- Carrito de compra
-
-//>Variables
-const productos = [
-    {
-        id: 1,
-        nombre: "sneaker1",
-        precio: 700,
-        imagen: "../assets/productos/producto-1.webp",
-        color: "blanco",
-    },
-    {
-        id: 2,
-        nombre: "sneaker2",
-        precio: 750,
-        imagen: "../assets/productos/producto-2.webp",
-        color: "negro",
-    },
-    {
-        id: 3,
-        nombre: "sneaker3",
-        precio: 600,
-        imagen: "../assets/productos/producto-3.webp",
-        color: "gris",
-    },
-    {
-        id: 4,
-        nombre: "sneaker4",
-        precio: 650,
-        imagen: "../assets/productos/producto-4.webp",
-        color: "cafe",
-    },
-    {
-        id: 5,
-        nombre: "sneaker5",
-        precio: 500,
-        imagen: "../assets/productos/producto-5.webp",
-        color: "rojo",
-    },
-    {
-        id: 6,
-        nombre: "sneaker6",
-        precio: 400,
-        imagen: "../assets/productos/producto-6.webp",
-        color: "verde",
-    },
-    {
-        id: 7,
-        nombre: "sneaker7",
-        precio: 450,
-        imagen: "../assets/productos/producto-7.webp",
-        color: "rosado",
-    },
-    {
-        id: 8,
-        nombre: "sneaker8",
-        precio: 600,
-        imagen: "../assets/productos/producto-8.webp",
-        color: "azul",
-    },
-]
-
-let carrito = [];
 
 
-//---> Agregar productos al carrito de compra
-function carritoDeCompras(event) {
-    // Añadimos el id a nuestra variable "carrito"
-    carrito.push(event.target.getAttribute("marcador"));
 
-    console.log(carrito);
-    // Actualizamos el carrito 
-    renderizarCarrito();
-}
 
-//---- //---- Añadir productos a carrito de compra
-function renderizarCarrito(){
-    // Creamos una nueva array
-    const carritoDuplicados = [...new Set(carrito)];
-    console.log(carritoDuplicados);
-    // Comprobamos que no este duplicado los items del nuevo array con los ID del array de productos
-    carritoDuplicados.forEach(function(item){
-        const miProducto = productos.filter(function(producto){
-            return producto.id === parseInt(item);
-        });
-    });
-    console.log(carritoDuplicados);
+// //------------- Carrito de compra "Avanzado"
 
-    // Numero de veces que se repiten los productos
-    const numeroDeProductos = carrito.reduce((contador, itemId) => {
-        // ¿Coincide las id? Incremento el contador, en caso contrario lo mantengo
-        return itemId === item 
+// //>Variables
+// const productos = [
+//     {
+//         id: 1,
+//         nombre: "sneaker1",
+//         precio: 700,
+//         imagen: "../assets/productos/producto-1.webp",
+//         color: "blanco",
+//     },
+//     {
+//         id: 2,
+//         nombre: "sneaker2",
+//         precio: 750,
+//         imagen: "../assets/productos/producto-2.webp",
+//         color: "negro",
+//     },
+//     {
+//         id: 3,
+//         nombre: "sneaker3",
+//         precio: 600,
+//         imagen: "../assets/productos/producto-3.webp",
+//         color: "gris",
+//     },
+//     {
+//         id: 4,
+//         nombre: "sneaker4",
+//         precio: 650,
+//         imagen: "../assets/productos/producto-4.webp",
+//         color: "cafe",
+//     },
+//     {
+//         id: 5,
+//         nombre: "sneaker5",
+//         precio: 500,
+//         imagen: "../assets/productos/producto-5.webp",
+//         color: "rojo",
+//     },
+//     {
+//         id: 6,
+//         nombre: "sneaker6",
+//         precio: 400,
+//         imagen: "../assets/productos/producto-6.webp",
+//         color: "verde",
+//     },
+//     {
+//         id: 7,
+//         nombre: "sneaker7",
+//         precio: 450,
+//         imagen: "../assets/productos/producto-7.webp",
+//         color: "rosado",
+//     },
+//     {
+//         id: 8,
+//         nombre: "sneaker8",
+//         precio: 600,
+//         imagen: "../assets/productos/producto-8.webp",
+//         color: "azul",
+//     },
+// ]
 
-    });
-} 
+
+// let carrito = [];
+
+
+// //---> Agregar productos al carrito de compra
+// function carritoDeCompras(event) {
+//     // Añadimos el id a nuestra variable "carrito"
+//     carrito.push(event.target.getAttribute("marcador"));
+
+//     console.log(carrito);
+//     // Actualizamos el carrito 
+//     crearCarrito();
+// }
+
+// //---- //---- Añadir productos a carrito de compra
+// function crearCarrito(){
+//     // Creamos una nueva array
+//     const carritoDuplicados = [...new Set(carrito)];
+//     //log para ver el funcionamiento del Set
+//     console.log(carritoDuplicados);
+//     // Comprobamos que no este duplicado los items del nuevo array con los ID del array de productos
+//     carritoDuplicados.forEach(function(item){
+//         const miProducto = productos.filter(function(itemProducto){
+//             return itemProducto.id === parseInt(item);
+//         });
+
+//         //log para revisar que se guarden los productos sin duplicar
+//         console.log(carritoDuplicados);
+
+//         // Numero de veces que se repiten los productos
+//         const numeroDeProductos = carrito.reduce(function(acumulador, itemId){
+//             // ¿Coincide las id? Incremento el contador, en caso contrario lo mantengo (Aqui uso ?: para hacer valer las condiciones)
+//             return itemId === item ? acumulador += 1: acumulador;}, 0);
+//         //log para ver si cuentan los productos individualmente
+//         console.log(numeroDeProductos);
+
+
+//     });
+    
+// } 
+
 
 
 
