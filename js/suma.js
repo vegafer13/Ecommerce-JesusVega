@@ -19,6 +19,10 @@ console.log(suma(5,30));
 
 
 
+
+
+
+
 // Gestion de Usuarios
 
 window.onload = iniciar;
@@ -102,6 +106,8 @@ function ingresoUsuarios(){
             alert(`Ya existen la cantidad maxima de usuarios\nElimine un usuario para crear uno nuevo`)
             return
         }
+
+
     }
 }
 
