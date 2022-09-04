@@ -1,4 +1,4 @@
-//Variables
+//Variables array
 const carrito = [];
 const nuevoRegistroUser = [];
 const nuevoLoginUser = [];
@@ -129,25 +129,24 @@ function selecccionarProductos() {
             let mensaje = `Ticket ${carrito.length + 1}\nYa generamos tu pedido:\n${cantidad} Sneakers de color ${color}\nTotal a pagar: $${total}`;
             alert(mensaje);
 
-             //Escribir en los pedidos en <li>
-             document.getElementById(`ticket${carrito.length + 1}`).textContent=(`${carrito.length + 1}`);
-             document.getElementById(`cantidad${carrito.length + 1}`).textContent=(`${cantidad}`);
-             document.getElementById(`color${carrito.length + 1}`).textContent=(`${color}`);
-             document.getElementById(`talla${carrito.length + 1}`).textContent=(`${talla}`);
-             document.getElementById(`total${carrito.length + 1}`).textContent=(`$ ${total}`);
+                //Escribir en los pedidos en la tabla
+                document.getElementById(`ticket${carrito.length + 1}`).textContent=(`${carrito.length + 1}`);
+                document.getElementById(`cantidad${carrito.length + 1}`).textContent=(`${cantidad}`);
+                document.getElementById(`color${carrito.length + 1}`).textContent=(`${color}`);
+                document.getElementById(`talla${carrito.length + 1}`).textContent=(`${talla}`);
+                document.getElementById(`total${carrito.length + 1}`).textContent=(`$ ${total}`);
 
             //> "push" para agregar ticket a la cola
             carrito.push(pedido);
 
-            // document.getElementById(`ticket${carrito.length + 1}`).textContent=(`${cantidad} - Sneakers color ${color} Total = $${total}`);
 
-            //Hacer la suma total del costo de todos los pedidos y mostrarlo en el index
+            //Hacer la suma total del costo de todos los pedidos y mostrarlo
             const cantidadTotal = carrito.reduce((acumulador, item) => acumulador + item.cantidad, 0);
             document.getElementById("totalProductos").textContent=(cantidadTotal);
                     //Se muestra en la parte superior de carrito de compra
             document.getElementById("totalProductosCart").textContent=(cantidadTotal);
 
-            //Hacer la suma total del costo de todos los pedidos y mostrarlo en el index
+            //Hacer la suma total del costo de todos los pedidos y mostrarlo
             const acumuladoTotal = carrito.reduce((acumulador, item) => acumulador + item.total, 0);
             document.getElementById("totalPrecio").textContent=(`$ ${acumuladoTotal}`);
                     //Se muestra en la parte superior de carrito de compra
@@ -158,13 +157,14 @@ function selecccionarProductos() {
 
         }
 
+        //Agregar otro ticket
         let otroPedido = confirm(`¿Desea realizar otro pedido?`)
         
         if(otroPedido == false){
             alert(`${carrito.length} Pedido creado`)
             return
         }else if(carrito.length == cantidad){
-            alert(`Ya existen la cantidad maxima de pedidos\nElimine un pedido para crear uno nuevo`)
+            alert(`Ya existen la cantidad maxima de pedidos`)
             return
         }
 
@@ -174,11 +174,11 @@ function selecccionarProductos() {
 
 }
 
-// Boton para pagar y aplicar descuento por monto de compra
+
+//--------------> funcion en Boton para pagar y aplicar descuento por monto de compra
 function pagarDescuento() {
     //Hacer la suma total del costo de todos los pedidos y mostrarlo en el index
     const acumuladoTotal = carrito.reduce((acumulador, item) => acumulador + item.total, 0);
-
 
     console.log(acumuladoTotal);
 
@@ -216,12 +216,10 @@ function pagarDescuento() {
     
 }
 
-// ----------> eliminar pedidos
+// ----------> eliminar pedidos / No terminado
 function vaciarCarrito() {
     // Limpiamos los productos guardados
     carrito = [];
-
-
 }
 
 //----------> Funcion Registro de usuario (Boton Crear cuenta)
