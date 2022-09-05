@@ -68,12 +68,13 @@ function selecccionarProductos() {
     //variable para medir cuantas veces se puede agregar tickets
     let cantidad = 3; 
 
+    //Variable para generar una lista desde la base de datos, de cada color de los sneakers
+    let colorBaseDatos = productos.map((item) => item.color);
+
     //if para validar que no existen mas de 3 tickets
     if(carrito.length == cantidad){
         alert(`Ya no puede agregar pedidos nuevos`);
-        return;
     };
-
 
 
     //Contructor de pedidos
@@ -91,11 +92,12 @@ function selecccionarProductos() {
         //For para agregar nuevos tickets
         for (let i = 0; i < 1; i++) {
             //Ingresamos el color del sneaker que queremos
-            let colorProducto = prompt(`Ticket ${carrito.length + 1}\nIngresa el color de tu Sneaker\nBlanco\nNegro\nGris\nCafe\nRojo\nVerde\nRosado\nAzul`);
+            // let colorProducto = prompt(`Ticket ${carrito.length + 1}\nIngresa el color de tu Sneaker\nBlanco\nNegro\nGris\nCafe\nRojo\nVerde\nRosado\nAzul`);
+            let colorProducto = prompt(`Ticket ${carrito.length + 1}\nIngresa el color de tu Sneaker \n${colorBaseDatos.join("\n")}`);
             //Convertimos el texto en minuscula para que no interfiera con la busqueda en el array de productos.
             let color = colorProducto.toLowerCase();
-            console.log(color);
-                while (color != "blanco" && color != "negro" && color != "gris" && color != "cafe" && color != "rojo" && color != "verde" && color != "rosado" && color != "azul") {
+                console.log(color);
+                if(color != "blanco" && color != "negro" && color != "gris" && color != "cafe" && color != "rojo" && color != "verde" && color != "rosado" && color != "azul") {
                     alert(`Ticket ${carrito.length + 1}\nIngrese algun color que tenemos en nuestro catalago`);
                     continue;
                 };
@@ -106,7 +108,7 @@ function selecccionarProductos() {
             //Ingresamos la talla del producto
             let talla = parseInt(prompt(`Ticket ${carrito.length + 1}\nIngresa la talla de tu sneaker\n*No hay tallas medias*\n23\n24\n25\n26`));
                 //If para filtrar tallas que tenemos
-                if(talla >= 23 && talla < 26) {
+                if(talla >= 23 && talla <= 26) {
                     console.log(talla);
                 }else{
                     alert("No contamos con esas tallas de calzado, vuelve a intentar... ");
@@ -115,7 +117,7 @@ function selecccionarProductos() {
             //Ingresamos la cantidad del producto
             let cantidad = parseInt(prompt(`Ticket ${carrito.length + 1}\nIngresa cuantos Sneakers de color ${color} vas a comprar`));
                 //filtro para que el usuario ponga un numero
-                while (cantidad <= 0) {
+                while (cantidad === 0){
                     alert("No pusiste cuantos productos quieres.");
                     cantidad = parseInt(prompt(`Ticket ${carrito.length + 1}\nIngresa cuantos Sneakers de color ${color} vas a comprar`));
                 };
@@ -138,7 +140,7 @@ function selecccionarProductos() {
 
             //> "push" para agregar ticket a la cola
             carrito.push(pedido);
-
+            console.log(carrito);
 
             //Hacer la suma total del costo de todos los pedidos y mostrarlo
             const cantidadTotal = carrito.reduce((acumulador, item) => acumulador + item.cantidad, 0);
@@ -170,7 +172,8 @@ function selecccionarProductos() {
 
         
     }
-    console.log(carrito);
+
+    
 
 }
 
@@ -211,7 +214,7 @@ function pagarDescuento() {
                 alert(`${ventaText}Total a pagar 🏷$${montoTotal}`);
 
             }else{
-                alert("Ingresa un valor");
+                alert("Realiza tu pedido en el botón iniciar ");
         }
     
 }
@@ -220,6 +223,7 @@ function pagarDescuento() {
 function vaciarCarrito() {
     // Limpiamos los productos guardados
     carrito = [];
+    console.log(carrito);
 }
 
 //----------> Funcion Registro de usuario (Boton Crear cuenta)
