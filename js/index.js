@@ -1,18 +1,12 @@
-//Variables array
-const carrito = [];
-const nuevoRegistroUser = [];
-const nuevoLoginUser = [];
-const nuevoNewsletter = [];
-
-//----------> Funcion seleccionar productos
-function selecccionarProductos() {
-    const productos = [
+// Base de datos
+const productos = [
     {
         id: 1,
         nombre: "sneaker1",
         precio: 700,
         imagen: "./assets/productos/producto-1.webp",
         color: "blanco",
+        estrellas: 5,
     },
     {
         id: 2,
@@ -20,6 +14,7 @@ function selecccionarProductos() {
         precio: 750,
         imagen: "./assets/productos/producto-2.webp",
         color: "negro",
+        estrellas: 5,
     },
     {
         id: 3,
@@ -27,6 +22,7 @@ function selecccionarProductos() {
         precio: 600,
         imagen: "./assets/productos/producto-3.webp",
         color: "gris",
+        estrellas: 4,
     },
     {
         id: 4,
@@ -34,6 +30,7 @@ function selecccionarProductos() {
         precio: 650,
         imagen: "./assets/productos/producto-4.webp",
         color: "cafe",
+        estrellas: 5,
     },
     {
         id: 5,
@@ -41,6 +38,7 @@ function selecccionarProductos() {
         precio: 500,
         imagen: "./assets/productos/producto-5.webp",
         color: "rojo",
+        estrellas: 3,
     },
     {
         id: 6,
@@ -48,6 +46,7 @@ function selecccionarProductos() {
         precio: 400,
         imagen: "./assets/productos/producto-6.webp",
         color: "verde",
+        estrellas: 3,
     },
     {
         id: 7,
@@ -55,6 +54,7 @@ function selecccionarProductos() {
         precio: 450,
         imagen: "./assets/productos/producto-7.webp",
         color: "rosado",
+        estrellas: 4,
     },
     {
         id: 8,
@@ -62,8 +62,76 @@ function selecccionarProductos() {
         precio: 600,
         imagen: "./assets/productos/producto-8.webp",
         color: "azul",
+        estrellas: 5,
     },
 ];
+
+// Variables array
+const carrito = [];
+const nuevoRegistroUser = [];
+const nuevoLoginUser = [];
+const nuevoNewsletter = [];
+
+
+//Variables DOM
+const productosDOM = document.querySelector("#productCard");
+
+//----------> DOM para generar los productos en html
+productos.forEach((item) => {
+    //Div contenedor
+    let nodo = document.createElement("div");
+    nodo.classList.add("col", "mb-5");
+        //Div Card
+        let nodoCard = document.createElement("div");
+        nodoCard.classList.add("card", "h-100");
+        nodoCard.setAttribute("id", "productCardBody");
+            //Imagen producto
+            let nodoCardImagen = document.createElement("img");
+            nodoCardImagen.classList.add("card-img-top");
+            nodoCardImagen.setAttribute("src", item.imagen);
+            //Div Card body
+            let nodoCardBody = document.createElement("div");
+            nodoCardBody.classList.add("card-body", "p-4");
+                //Div Card Text
+                let nodoCardText = document.createElement("div");
+                nodoCardText.classList.add("text-center");
+                    //Titulo producto
+                    let nodoCardTitle = document.createElement("h5");
+                    nodoCardTitle.classList.add("fw-bolder");
+                    nodoCardTitle.textContent = item.color;
+                    //Div Estrellas del producto
+                    let nodoCardStar = document.createElement("div");
+                    nodoCardStar.classList.add("d-flex", "justify-content-center", "small", "text-warning", "mb-2");
+                        //Div para agregar la cantidad de estrellas
+                    //Precio de producto
+                    let nodoCardPrecio = document.createElement("div");
+                    nodoCardPrecio.textContent = (`$${item.precio}`);
+    //Div Boton
+    let nodoBoton = document.createElement("div");
+    nodoBoton.classList.add("card-footer", "p-4", "pt-0", "border-top-0", "bg-transparent", "d-flex", "justify-content-center")
+        //Boton de agregar producto
+        let nodoBotonAdd = document.createElement("button");
+        nodoBotonAdd.classList.add("btn", "btn-light", "btn-outline-dark", "mt-auto");
+        nodoBotonAdd.textContent = 'Agregar al Carrito';
+        nodoBotonAdd.setAttribute("marcador", item.id)
+        nodoBotonAdd.setAttribute("click", "carritoDeCompras");
+
+    //Se unifica todo la tarjeta
+    productosDOM.appendChild(nodo);
+    nodo.appendChild(nodoCard);
+    nodoCard.appendChild(nodoCardImagen);
+    nodoCard.appendChild(nodoCardBody);
+    nodoCardBody.appendChild(nodoCardText);
+    nodoCardText.appendChild(nodoCardTitle);
+    nodoCardText.appendChild(nodoCardStar);
+    nodoCardText.appendChild(nodoCardPrecio);
+    nodoCard.appendChild(nodoBoton);
+    nodoBoton.appendChild(nodoBotonAdd);
+});
+    
+
+//----------> Funcion seleccionar productos
+function selecccionarProductos() {
 
     //variable para medir cuantas veces se puede agregar tickets
     let cantidad = 3; 
