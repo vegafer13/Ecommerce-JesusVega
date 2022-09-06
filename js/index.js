@@ -106,6 +106,7 @@ function selecccionarProductos() {
                     console.log(producto)
                     console.log(producto.precio)
             //Ingresamos la talla del producto
+            // let imagen = producto.imagen;
             let talla = parseInt(prompt(`Ticket ${carrito.length + 1}\nIngresa la talla de tu sneaker\n*No hay tallas medias*\n23\n24\n25\n26`));
                 //If para filtrar tallas que tenemos
                 if(talla >= 23 && talla <= 26) {
@@ -132,6 +133,7 @@ function selecccionarProductos() {
             alert(mensaje);
 
                 //Escribir en los pedidos en la tabla
+                document.getElementById(`imagen${carrito.length + 1}`).src=(`${producto.imagen}`);
                 document.getElementById(`ticket${carrito.length + 1}`).textContent=(`${carrito.length + 1}`);
                 document.getElementById(`cantidad${carrito.length + 1}`).textContent=(`${cantidad}`);
                 document.getElementById(`color${carrito.length + 1}`).textContent=(`${color}`);
