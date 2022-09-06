@@ -11,56 +11,56 @@ function selecccionarProductos() {
         id: 1,
         nombre: "sneaker1",
         precio: 700,
-        imagen: "../assets/productos/producto-1.webp",
+        imagen: "./assets/productos/producto-1.webp",
         color: "blanco",
     },
     {
         id: 2,
         nombre: "sneaker2",
         precio: 750,
-        imagen: "../assets/productos/producto-2.webp",
+        imagen: "./assets/productos/producto-2.webp",
         color: "negro",
     },
     {
         id: 3,
         nombre: "sneaker3",
         precio: 600,
-        imagen: "../assets/productos/producto-3.webp",
+        imagen: "./assets/productos/producto-3.webp",
         color: "gris",
     },
     {
         id: 4,
         nombre: "sneaker4",
         precio: 650,
-        imagen: "../assets/productos/producto-4.webp",
+        imagen: "./assets/productos/producto-4.webp",
         color: "cafe",
     },
     {
         id: 5,
         nombre: "sneaker5",
         precio: 500,
-        imagen: "../assets/productos/producto-5.webp",
+        imagen: "./assets/productos/producto-5.webp",
         color: "rojo",
     },
     {
         id: 6,
         nombre: "sneaker6",
         precio: 400,
-        imagen: "../assets/productos/producto-6.webp",
+        imagen: "./assets/productos/producto-6.webp",
         color: "verde",
     },
     {
         id: 7,
         nombre: "sneaker7",
         precio: 450,
-        imagen: "../assets/productos/producto-7.webp",
+        imagen: "./assets/productos/producto-7.webp",
         color: "rosado",
     },
     {
         id: 8,
         nombre: "sneaker8",
         precio: 600,
-        imagen: "../assets/productos/producto-8.webp",
+        imagen: "./assets/productos/producto-8.webp",
         color: "azul",
     },
 ];
@@ -138,7 +138,7 @@ function selecccionarProductos() {
                 document.getElementById(`cantidad${carrito.length + 1}`).textContent=(`${cantidad}`);
                 document.getElementById(`color${carrito.length + 1}`).textContent=(`${color}`);
                 document.getElementById(`talla${carrito.length + 1}`).textContent=(`${talla}`);
-                document.getElementById(`total${carrito.length + 1}`).textContent=(`$ ${total}`);
+                document.getElementById(`total${carrito.length + 1}`).textContent=(`$${total}`);
 
             //> "push" para agregar ticket a la cola
             carrito.push(pedido);
@@ -152,9 +152,9 @@ function selecccionarProductos() {
 
             //Hacer la suma total del costo de todos los pedidos y mostrarlo
             const acumuladoTotal = carrito.reduce((acumulador, item) => acumulador + item.total, 0);
-            document.getElementById("totalPrecio").textContent=(`$ ${acumuladoTotal}`);
+            document.getElementById("totalPrecio").textContent=(`$${acumuladoTotal}`);
                     //Se muestra en la parte superior de carrito de compra
-            document.getElementById("totalPrecioCart").textContent=(`$ ${acumuladoTotal}`);
+            document.getElementById("totalPrecioCart").textContent=(`$${acumuladoTotal}`);
 
 
         console.log(acumuladoTotal);
