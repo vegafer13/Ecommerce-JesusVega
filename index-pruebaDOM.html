@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
     <title>SneakersMx</title>
 </head>
+<body>
 <header class="section-header fixed-top">
     <nav class="navbar navbar-dark navbar-expand p-0 bg-dark">
     <div class="container-fluid flex-column flex-md-row">
@@ -33,24 +34,25 @@
             <li class="nav-item">
                 <a href="#" class="nav-link d-flex align-items-center" data-abc="true"><span id="textUser">Usuario</span></a>
             </li>
-            
         </ul>
       </div>
-     <!-- container -->
-    </nav> <!-- header-top -->
+     <!-- container barra busqueda y carrito -->
+    </nav>
     <section class="header-main border-bottom bg-white">
         <div class="container-fluid">
            <div class="row p-2 pt-3 pb-3 d-flex align-items-center">
+                <!-- Logo de la empresa -->
                <div class="col-md-2">
                    <img  class="d-none d-md-flex" src="" width="100">
                </div>
                <div class="col-md-8">
+            <!-- Barra de busqueda -->
             <div class="d-flex form-inputs">
-            <input class="form-control" type="text" placeholder="¿Que color buscas?...">
-            <i class="bx bx-search"></i>
+                <input class="form-control" type="text" placeholder="¿Que color buscas?...">
+                <i class="bx bx-search"></i>
             </div>
                </div>
-               
+               <!-- Carrito de compra -->
                <div class="col-md-2">
                    <div class="d-flex d-none d-md-flex flex-row align-items-center">
                        <span class="shop-bag"><i class="bi bi-cart-fill"></i></span>
@@ -63,7 +65,7 @@
            </div>
         </div> 
     </section>
-    
+    <!-- Menu productos -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="container-fluid">
         <a class="navbar-brand d-md-none d-md-flex" href="#">Productos</a>
@@ -94,74 +96,6 @@
             <!-- Lista de Productos -->
             <div class="container px-4 px-lg-5 mt-5">
                 <div id="productCard" class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-                </div>
-            <!-- Generador de pedidos -->
-            <div class="container px-4 px-lg-5 my-3">
-                <div class="justify-content-center text-center">
-                    <div class="col">
-                        <h2 class="my-3">Realiza tu pedido</h2>
-                        <!-- Iniciar pedido -->
-                        <button class="btn btn-primary my-3" onclick="selecccionarProductos()">Iniciar</button>
-                        <!-- Total de tickets carrito -->
-                        <p class="text-right">Productos: <span id="totalProductos"> 0 </span></p>
-                        <!-- Elementos del carrito -->
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-12">
-                                    <table class="table">
-                                        <thead class="thead-dark">
-                                        <tr class="f">
-                                            <th scope="col">#</th>
-                                            <th scope="col">Imagen</th>
-                                            <th scope="col">Cant.</th>
-                                            <th scope="col">Color</th>
-                                            <th scope="col">Talla</th>
-                                            <th scope="col">Total</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <tr>
-                                            <th scope="row" id="ticket1"></th>
-                                            <td class="w-25">
-                                                <img alt="" id="imagen1" src="" class="img-fluid img-thumbnail"/>
-                                            </td>
-                                            <td id="cantidad1" class=""></td>
-                                            <td id="color1"></td>
-                                            <td id="talla1"></td>
-                                            <td id="total1"></td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row" id="ticket2"></th>
-                                            <td class="w-25">
-                                                <img alt="" id="imagen2" src="" class="img-fluid img-thumbnail"/>
-                                            </td>
-                                            <td id="cantidad2"></td>
-                                            <td id="color2"></td>
-                                            <td id="talla2"></td>
-                                            <td id="total2"></td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row" id="ticket3"></th>
-                                            <td class="w-25">
-                                                <img alt="" id="imagen3" src="" class="img-fluid img-thumbnail"/>
-                                            </td>
-                                            <td id="cantidad3"></td>
-                                            <td id="color3"></td>
-                                            <td id="talla3"></td>
-                                            <td id="total3"></td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row" class="text-left" colspan="5">Precio total</th>
-                                            <th id="totalPrecio"></th>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                          <!-- Boton para pagar y aplicar descuento por monto de compra -->
-                          <button class="btn btn-danger" onclick="pagarDescuento()">Pagar</button>
-                    </div>
                 </div>
             </div>
         </section>
