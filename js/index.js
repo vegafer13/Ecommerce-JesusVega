@@ -7,6 +7,7 @@ const productos = [
         imagen: "./assets/productos/producto-1.webp",
         color: "blanco",
         estrellas: 5,
+        tallas: [23,24,25,26],
     },
     {
         id: 2,
@@ -15,6 +16,7 @@ const productos = [
         imagen: "./assets/productos/producto-2.webp",
         color: "negro",
         estrellas: 5,
+        tallas: [23,24,25,26],
     },
     {
         id: 3,
@@ -23,6 +25,7 @@ const productos = [
         imagen: "./assets/productos/producto-3.webp",
         color: "gris",
         estrellas: 4,
+        tallas: [23,24,25,26],
     },
     {
         id: 4,
@@ -31,6 +34,7 @@ const productos = [
         imagen: "./assets/productos/producto-4.webp",
         color: "cafe",
         estrellas: 5,
+        tallas: [23,24,25,26],
     },
     {
         id: 5,
@@ -39,6 +43,7 @@ const productos = [
         imagen: "./assets/productos/producto-5.webp",
         color: "rojo",
         estrellas: 3,
+        tallas: [23,24,25,26],
     },
     {
         id: 6,
@@ -47,6 +52,7 @@ const productos = [
         imagen: "./assets/productos/producto-6.webp",
         color: "verde",
         estrellas: 3,
+        tallas: [23,24,25,26],
     },
     {
         id: 7,
@@ -55,6 +61,7 @@ const productos = [
         imagen: "./assets/productos/producto-7.webp",
         color: "rosado",
         estrellas: 4,
+        tallas: [23,24,25,26],
     },
     {
         id: 8,
@@ -63,6 +70,7 @@ const productos = [
         imagen: "./assets/productos/producto-8.webp",
         color: "azul",
         estrellas: 5,
+        tallas: [23,24,25,26],
     },
 ];
 
@@ -75,6 +83,7 @@ const nuevoNewsletter = [];
 
 //Variables DOM
 const productosDOM = document.querySelector("#productCard");
+const carritoDOM = document.querySelector("#cartShop")
 
 //----------> DOM para generar los productos en html
 productos.forEach((item) => {
@@ -91,7 +100,7 @@ productos.forEach((item) => {
             nodoCardImagen.setAttribute("src", item.imagen);
             //Div Card body
             let nodoCardBody = document.createElement("div");
-            nodoCardBody.classList.add("card-body", "p-4");
+            nodoCardBody.classList.add("card-body", "p-2");
                 //Div Card Text
                 let nodoCardText = document.createElement("div");
                 nodoCardText.classList.add("text-center");
@@ -103,18 +112,21 @@ productos.forEach((item) => {
                     let nodoCardStar = document.createElement("div");
                     nodoCardStar.classList.add("d-flex", "justify-content-center", "small", "text-warning", "mb-2");
                     //Div para agregar la talla que deseas
-                    let nodoCardTalla = document.createElement("div");
+                    let nodoCardTalla = document.createElement("select");
                     nodoCardTalla.classList.add("form-select");
+                    nodoCardTalla.setAttribute("id", "selectTallas");
                         //Opciones a elegir
                         let tallasElegir = document.createElement("option");
-                        tallasElegir.textContent = ("Elige tu talla");
+                        tallasElegir.classList.add("text-center");
+                        tallasElegir.textContent = (`${item.tallas}`);
                         
                     //Precio de producto
                     let nodoCardPrecio = document.createElement("div");
+                    nodoCardPrecio.classList.add("mt-3");
                     nodoCardPrecio.textContent = (`$${item.precio}`);
     //Div Boton
     let nodoBoton = document.createElement("div");
-    nodoBoton.classList.add("card-footer", "p-4", "pt-0", "border-top-0", "bg-transparent", "d-flex", "justify-content-center")
+    nodoBoton.classList.add("card-footer", "pb-4", "px-4", "border-top-0", "bg-transparent", "d-flex", "justify-content-center")
         //Boton de agregar producto
         let nodoBotonAdd = document.createElement("button");
         nodoBotonAdd.classList.add("btn", "btn-light", "btn-outline-dark", "mt-auto");
@@ -130,9 +142,9 @@ productos.forEach((item) => {
     nodoCard.appendChild(nodoCardBody);
     nodoCardBody.appendChild(nodoCardText);
     nodoCardText.appendChild(nodoCardTitle);
-    nodoCardText.appendChild(nodoCardStar);
-    nodoCardText.appendChild(nodoCardTalla);
-    nodoCardTalla.appendChild(tallasElegir);
+        nodoCardText.appendChild(nodoCardStar);
+        nodoCardText.appendChild(nodoCardTalla);
+        nodoCardTalla.appendChild(tallasElegir);
     nodoCardText.appendChild(nodoCardPrecio);
     nodoCard.appendChild(nodoBoton);
     nodoBoton.appendChild(nodoBotonAdd);
@@ -437,63 +449,44 @@ function carritoDeCompras(event) {
     cart.push(event.target.getAttribute("marcador"));
     console.log(cart);
 
-    // Contructor de pedidos
-class producto{
-    constructor(idProducto, tallaProducto, cantidadProducto, totalProducto){
-    this.id = idProducto;
-    this.talla = tallaProducto,
-    this.cantidad = cantidadProducto;
-    this.total = totalProducto;
-    }
-}
+    //Hacer la suma total del costo de todos los pedidos y mostrarlo
+    const sumaProductos = cart.reduce((acumulador, item) => acumulador + item.length, 0);
+    document.getElementById("totalProductosCart").textContent=(sumaProductos);
+    console.log(sumaProductos);
 
-for (let i = 0; i < 1; i++) {
-    //Buscamos el productp
-    let idProducto = productos.find(item => item.id == event.target.getAttribute("marcador"));
-    console.log(idProducto);
-    let tallaProducto = document.getElementById("dato");
 
-    
-}
-    // Actualizamos el carrito 
-
+    crearCarrito()
 }
 
 //---- //---- Añadir productos a carrito de compra
 function crearCarrito(){
+    // Creamos un nuevo array para no repetir los objetos
+    const carritoDuplicados = [...new Set(cart)];
+    // Comprobamos que no este duplicado los items del nuevo array con los ID del array de productos
+    carritoDuplicados.forEach(function(item){
+        const miProducto = productos.filter(function(itemProductos){
+            return itemProductos.id === parseInt(item);
+        });
 
+    //log para revisar que se guarden los productos sin duplicar
+    console.log(carritoDuplicados);
 
-    // // Creamos una nueva array
-    // const carritoDuplicados = [...new Set(carrito)];
-    // //log para ver el funcionamiento del Set
-    // console.log(carritoDuplicados);
-    // // Comprobamos que no este duplicado los items del nuevo array con los ID del array de productos
-    // carritoDuplicados.forEach(function(item){
-    //     const miProducto = productos.filter(function(itemProducto){
-    //         return itemProducto.id === parseInt(item);
-    //     });
+    // Numero de veces que se repiten los productos
+    const numeroDeProductos = cart.reduce(function(acumulador, itemId){
+        // ¿Coincide las id? Incremento el contador, en caso contrario lo mantengo (Aqui uso ?: para hacer valer las condiciones)
+        return itemId === item ? acumulador += 1: acumulador;}, 0);
+        //log para ver si cuentan los productos individualmente
+        console.log(numeroDeProductos);
 
-    //     //log para revisar que se guarden los productos sin duplicar
-    //     console.log(carritoDuplicados);
+        console.log(carritoDuplicados.nombre);
+    
+    
+    //Creamos los productos en la pagina "Cart.html"
+    let nodo = document.createElement("li");
+    nodo.classList.add("list-group-item", "mb-5");
+    nodo.textContent = (`${numeroDeProductos} - ${miProducto[0].nombre} - $${miProducto[0].precio}`)
 
-    //     // Numero de veces que se repiten los productos
-    //     const numeroDeProductos = carrito.reduce(function(acumulador, itemId){
-    //         // ¿Coincide las id? Incremento el contador, en caso contrario lo mantengo (Aqui uso ?: para hacer valer las condiciones)
-    //         return itemId === item ? acumulador += 1: acumulador;}, 0);
-    //     //log para ver si cuentan los productos individualmente
-    //     console.log(numeroDeProductos);
-
-
-    // });
+    });
     
 } 
 
-
-
-
- 
- 
-
-
-
-let talla = [23,24,25,26,27];

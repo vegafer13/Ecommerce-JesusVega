@@ -86,66 +86,10 @@
         <!-- Generador de pedidos -->
         <div class="container p-4 p-lg-5 my-3">
             <div class="justify-content-center text-center">
-                <div class="col">
-                    <h2 class="my-3">Realiza tu pedido</h2>
-                    <!-- Iniciar pedido -->
-                    <button class="btn btn-primary my-3" onclick="selecccionarProductos()">Iniciar</button>
-                    <!-- Total de tickets carrito -->
-                    <p class="text-right">Productos: <span id="totalProductos"> 0 </span></p>
-                    <!-- Elementos del carrito -->
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-12">
-                                <table class="table">
-                                    <thead class="thead-dark">
-                                    <tr class="f">
-                                        <th scope="col">#</th>
-                                        <th scope="col">Imagen</th>
-                                        <th scope="col">Cant.</th>
-                                        <th scope="col">Color</th>
-                                        <th scope="col">Talla</th>
-                                        <th scope="col">Total</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <th scope="row" id="ticket1"></th>
-                                        <td class="w-25">
-                                            <img alt="" id="imagen1" src="" class="img-fluid img-thumbnail"/>
-                                        </td>
-                                        <td id="cantidad1" class=""></td>
-                                        <td id="color1"></td>
-                                        <td id="talla1"></td>
-                                        <td id="total1"></td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row" id="ticket2"></th>
-                                        <td class="w-25">
-                                            <img alt="" id="imagen2" src="" class="img-fluid img-thumbnail"/>
-                                        </td>
-                                        <td id="cantidad2"></td>
-                                        <td id="color2"></td>
-                                        <td id="talla2"></td>
-                                        <td id="total2"></td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row" id="ticket3"></th>
-                                        <td class="w-25">
-                                            <img alt="" id="imagen3" src="" class="img-fluid img-thumbnail"/>
-                                        </td>
-                                        <td id="cantidad3"></td>
-                                        <td id="color3"></td>
-                                        <td id="talla3"></td>
-                                        <td id="total3"></td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row" class="text-left" colspan="5">Precio total</th>
-                                        <th id="totalPrecio"></th>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
+                <div class="col-12">
+                    <h2 class="my-3">Carrito de compra</h2>
+                        <ul id="cartShop"></ul>
+            
                     </div>
                     <!-- Boton para pagar y aplicar descuento por monto de compra -->
                     <button class="btn btn-danger" onclick="pagarDescuento()">Pagar</button>
