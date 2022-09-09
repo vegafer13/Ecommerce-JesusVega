@@ -7,7 +7,7 @@ const productos = [
         imagen: "./assets/productos/producto-1.webp",
         color: "blanco",
         estrellas: 5,
-        tallas: [23,24,25,26],
+        tallas: [23,24,25,26,27,28],
     },
     {
         id: 2,
@@ -16,7 +16,7 @@ const productos = [
         imagen: "./assets/productos/producto-2.webp",
         color: "negro",
         estrellas: 5,
-        tallas: [23,24,25,26],
+        tallas: [23,24,25,26,27,28],
     },
     {
         id: 3,
@@ -25,7 +25,7 @@ const productos = [
         imagen: "./assets/productos/producto-3.webp",
         color: "gris",
         estrellas: 4,
-        tallas: [23,24,25,26],
+        tallas: [23,24,25,26,27,28],
     },
     {
         id: 4,
@@ -34,7 +34,7 @@ const productos = [
         imagen: "./assets/productos/producto-4.webp",
         color: "cafe",
         estrellas: 5,
-        tallas: [23,24,25,26],
+        tallas: [23,24,25,26,27,28],
     },
     {
         id: 5,
@@ -43,7 +43,7 @@ const productos = [
         imagen: "./assets/productos/producto-5.webp",
         color: "rojo",
         estrellas: 3,
-        tallas: [23,24,25,26],
+        tallas: [23,24,25,26,27,28],
     },
     {
         id: 6,
@@ -52,7 +52,7 @@ const productos = [
         imagen: "./assets/productos/producto-6.webp",
         color: "verde",
         estrellas: 3,
-        tallas: [23,24,25,26],
+        tallas: [23,24,25,26,27,28],
     },
     {
         id: 7,
@@ -61,7 +61,7 @@ const productos = [
         imagen: "./assets/productos/producto-7.webp",
         color: "rosado",
         estrellas: 4,
-        tallas: [23,24,25,26],
+        tallas: [23,24,25,26,27,28],
     },
     {
         id: 8,
@@ -70,7 +70,7 @@ const productos = [
         imagen: "./assets/productos/producto-8.webp",
         color: "azul",
         estrellas: 5,
-        tallas: [23,24,25,26],
+        tallas: [23,24,25,26,27,28],
     },
 ];
 
@@ -115,10 +115,35 @@ productos.forEach((item) => {
                     let nodoCardTalla = document.createElement("select");
                     nodoCardTalla.classList.add("form-select");
                     nodoCardTalla.setAttribute("id", "selectTallas");
-                        //Opciones a elegir
+                        //Opciones a elegir "Seleccionar talla"
                         let tallasElegir = document.createElement("option");
                         tallasElegir.classList.add("text-center");
-                        tallasElegir.textContent = (`${item.tallas}`);
+                        tallasElegir.textContent = ("Seleccionar talla");
+                        //Opcion 1
+                        let tallasElegir1 = document.createElement("option");
+                        tallasElegir1.classList.add("text-center");
+                        tallasElegir1.textContent = `${item.tallas[0]}`;
+                        //Opcion 2
+                        let tallasElegir2 = document.createElement("option");
+                        tallasElegir2.classList.add("text-center");
+                        tallasElegir2.textContent = `${item.tallas[1]}`;
+                        //Opcion 3
+                        let tallasElegir3 = document.createElement("option");
+                        tallasElegir3.classList.add("text-center");
+                        tallasElegir3.textContent = `${item.tallas[2]}`;
+                        //Opcion 4
+                        let tallasElegir4 = document.createElement("option");
+                        tallasElegir4.classList.add("text-center");
+                        tallasElegir4.textContent = `${item.tallas[3]}`;
+                        //Opcion 5
+                        let tallasElegir5 = document.createElement("option");
+                        tallasElegir5.classList.add("text-center");
+                        tallasElegir5.textContent = `${item.tallas[4]}`;
+                        //Opcion 6
+                        let tallasElegir6 = document.createElement("option");
+                        tallasElegir6.classList.add("text-center");
+                        tallasElegir6.textContent = `${item.tallas[5]}`;
+
                         
                     //Precio de producto
                     let nodoCardPrecio = document.createElement("div");
@@ -145,6 +170,12 @@ productos.forEach((item) => {
         nodoCardText.appendChild(nodoCardStar);
         nodoCardText.appendChild(nodoCardTalla);
         nodoCardTalla.appendChild(tallasElegir);
+            nodoCardTalla.appendChild(tallasElegir1);
+            nodoCardTalla.appendChild(tallasElegir2);
+            nodoCardTalla.appendChild(tallasElegir3);
+            nodoCardTalla.appendChild(tallasElegir4);
+            nodoCardTalla.appendChild(tallasElegir5);
+            nodoCardTalla.appendChild(tallasElegir6);
     nodoCardText.appendChild(nodoCardPrecio);
     nodoCard.appendChild(nodoBoton);
     nodoBoton.appendChild(nodoBotonAdd);
@@ -482,11 +513,29 @@ function crearCarrito(){
     
     
     //Creamos los productos en la pagina "Cart.html"
-    let nodo = document.createElement("li");
+    const nodo = document.createElement("li");
     nodo.classList.add("list-group-item", "mb-5");
-    nodo.textContent = (`${numeroDeProductos} - ${miProducto[0].nombre} - $${miProducto[0].precio}`)
+    nodo.textContent = `${numeroDeProductos} - ${miProducto[0].nombre} - $${miProducto[0].precio}`;
+
+    const botonBorrar = document.createElement("button");
+    botonBorrar.classList.add("btn", "btn-danger");
+    botonBorrar.textContent= "Eliminar";
+    botonBorrar.dataset.item = item;
+    botonBorrar.addEventListener("click", borrarProductoCarrito);
+
+    nodo.appendChild(botonBorrar);
+    carritoDOM.appendChild(nodo);
 
     });
     
 } 
 
+function borrarProductoCarrito(evento) {
+    const id = evento.target.dataset.item;
+    // Borramos todos los productos
+    carrito = cart.filter((cartId) => {
+        return cartId !== id;
+    });
+    // volvemos a renderizar
+    crearCarrito();
+}
