@@ -53,3 +53,13 @@ body {
 }
 
 
+/* Modal */
+.modal-container{
+    visibility: hidden;
+}
+
+/* Hacer visible un modal */
+.modal-active{
+    visibility: visible;
+}
+

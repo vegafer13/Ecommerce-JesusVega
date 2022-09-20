@@ -1,78 +1,3 @@
-// Base de datos
-const productos = [
-    {
-        id: 1,
-        nombre: "sneaker1",
-        precio: 700,
-        imagen: "./assets/productos/producto-1.webp",
-        color: "blanco",
-        estrellas: 5,
-        tallas: [23,24,25,26,27,28],
-    },
-    {
-        id: 2,
-        nombre: "sneaker2",
-        precio: 750,
-        imagen: "./assets/productos/producto-2.webp",
-        color: "negro",
-        estrellas: 5,
-        tallas: [23,24,25,26,27,28],
-    },
-    {
-        id: 3,
-        nombre: "sneaker3",
-        precio: 600,
-        imagen: "./assets/productos/producto-3.webp",
-        color: "gris",
-        estrellas: 4,
-        tallas: [23,24,25,26,27,28],
-    },
-    {
-        id: 4,
-        nombre: "sneaker4",
-        precio: 650,
-        imagen: "./assets/productos/producto-4.webp",
-        color: "cafe",
-        estrellas: 5,
-        tallas: [23,24,25,26,27,28],
-    },
-    {
-        id: 5,
-        nombre: "sneaker5",
-        precio: 500,
-        imagen: "./assets/productos/producto-5.webp",
-        color: "rojo",
-        estrellas: 3,
-        tallas: [23,24,25,26,27,28],
-    },
-    {
-        id: 6,
-        nombre: "sneaker6",
-        precio: 400,
-        imagen: "./assets/productos/producto-6.webp",
-        color: "verde",
-        estrellas: 3,
-        tallas: [23,24,25,26,27,28],
-    },
-    {
-        id: 7,
-        nombre: "sneaker7",
-        precio: 450,
-        imagen: "./assets/productos/producto-7.webp",
-        color: "rosado",
-        estrellas: 4,
-        tallas: [23,24,25,26,27,28],
-    },
-    {
-        id: 8,
-        nombre: "sneaker8",
-        precio: 600,
-        imagen: "./assets/productos/producto-8.webp",
-        color: "azul",
-        estrellas: 5,
-        tallas: [23,24,25,26,27,28],
-    },
-];
 
 // Variables array
 const carrito = [];
@@ -80,107 +5,61 @@ const nuevoRegistroUser = [];
 const nuevoLoginUser = [];
 const nuevoNewsletter = [];
 
+//------- Renderizamos los productos al index por medio de DOM
+const mostrarProductos = (productos) => {
+    //Ponemos el id del contenedor donde vamos a colocar el los productos
+    const cardProductos = document.getElementById("productCard")
 
-//Variables DOM
-const productosDOM = document.querySelector("#productCard");
-const carritoDOM = document.querySelector("#cartShop")
+    //Iniciamos un llamado por medio de forEach, donde se crea cada uno de los productos
+    productos.forEach(producto => {
+        const div = document.createElement("div")
+        //agregamos una class que tendra la tarjeta de cada producto
+        div.classList.add("col", "mb-5")
+        //incrustamos el html con la informacion del producto dentro de la clase
+        div.innerHTML += `<div class="card h-100">
+                            <img class="card-img-top" src="${producto.imagen}" alt="${producto.nombre}" />
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <h5 class="fw-bolder">${producto.nombre}</h5>
+                                    <div id="listStar" class="d-flex justify-content-center small text-warning mb-2">
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                    </div>
+                                    <select class="form-select">
+                                        <option class="text-center">Tallas</option>
+                                        <option class="text-center" id="talla${producto.tallas[0]}">23</option>
+                                        <option class="text-center" id="talla${producto.tallas[1]}">24</option>
+                                        <option class="text-center" id="talla${producto.tallas[2]}">25</option>
+                                        <option class="text-center" id="talla${producto.tallas[3]}">26</option>
+                                        <option class="text-center" id="talla${producto.tallas[4]}">27</option>
+                                        <option class="text-center" id="talla${producto.tallas[5]}">28</option>
+                                    </select>
+                                    <div class="pt-3">$${producto.precio}</div>
+                                </div>
+                            </div>
+                            <div class="card-footer pb-4 pt-0 border-top-0 bg-transparent d-flex justify-content-center">
+                                <button type="button" class="btn btn-light btn-outline-dark mt-auto" id="boton${producto.id}">Agregar al carrito</button>
+                            </div>
+                        </div>`
 
-//----------> DOM para generar los productos en html
-productos.forEach((item) => {
-    //Div contenedor
-    let nodo = document.createElement("div");
-    nodo.classList.add("col", "mb-5");
-        //Div Card
-        let nodoCard = document.createElement("div");
-        nodoCard.classList.add("card", "h-100");
-        nodoCard.setAttribute("id", "productCardBody");
-            //Imagen producto
-            let nodoCardImagen = document.createElement("img");
-            nodoCardImagen.classList.add("card-img-top");
-            nodoCardImagen.setAttribute("src", item.imagen);
-            //Div Card body
-            let nodoCardBody = document.createElement("div");
-            nodoCardBody.classList.add("card-body", "p-2");
-                //Div Card Text
-                let nodoCardText = document.createElement("div");
-                nodoCardText.classList.add("text-center");
-                    //Titulo producto
-                    let nodoCardTitle = document.createElement("h5");
-                    nodoCardTitle.classList.add("fw-bolder");
-                    nodoCardTitle.textContent = item.color;
-                    //Div Estrellas del producto
-                    let nodoCardStar = document.createElement("div");
-                    nodoCardStar.classList.add("d-flex", "justify-content-center", "small", "text-warning", "mb-2");
-                    //Div para agregar la talla que deseas
-                    let nodoCardTalla = document.createElement("select");
-                    nodoCardTalla.classList.add("form-select");
-                    nodoCardTalla.setAttribute("id", "selectTallas");
-                        //Opciones a elegir "Seleccionar talla"
-                        let tallasElegir = document.createElement("option");
-                        tallasElegir.classList.add("text-center");
-                        tallasElegir.textContent = ("Seleccionar talla");
-                        //Opcion 1
-                        let tallasElegir1 = document.createElement("option");
-                        tallasElegir1.classList.add("text-center");
-                        tallasElegir1.textContent = `${item.tallas[0]}`;
-                        //Opcion 2
-                        let tallasElegir2 = document.createElement("option");
-                        tallasElegir2.classList.add("text-center");
-                        tallasElegir2.textContent = `${item.tallas[1]}`;
-                        //Opcion 3
-                        let tallasElegir3 = document.createElement("option");
-                        tallasElegir3.classList.add("text-center");
-                        tallasElegir3.textContent = `${item.tallas[2]}`;
-                        //Opcion 4
-                        let tallasElegir4 = document.createElement("option");
-                        tallasElegir4.classList.add("text-center");
-                        tallasElegir4.textContent = `${item.tallas[3]}`;
-                        //Opcion 5
-                        let tallasElegir5 = document.createElement("option");
-                        tallasElegir5.classList.add("text-center");
-                        tallasElegir5.textContent = `${item.tallas[4]}`;
-                        //Opcion 6
-                        let tallasElegir6 = document.createElement("option");
-                        tallasElegir6.classList.add("text-center");
-                        tallasElegir6.textContent = `${item.tallas[5]}`;
+    //Creamos la union de const div como hijo de cardProduct
+    cardProductos.appendChild(div);
+    
+    //Creamos un llamado de funcion por medio del boton, para que inicie una accion cada vez que le den clic al boton del producto
+    const boton = document.getElementById(`boton${producto.id}`)
+    boton.addEventListener('click', () => {
+        carritoIndex(producto.id)
+        alert(`Se agrego el producto ${producto.nombre}`)
+    })
+    
+    });
+    
+}
 
-                        
-                    //Precio de producto
-                    let nodoCardPrecio = document.createElement("div");
-                    nodoCardPrecio.classList.add("mt-3");
-                    nodoCardPrecio.textContent = (`$${item.precio}`);
-    //Div Boton
-    let nodoBoton = document.createElement("div");
-    nodoBoton.classList.add("card-footer", "pb-4", "px-4", "border-top-0", "bg-transparent", "d-flex", "justify-content-center")
-        //Boton de agregar producto
-        let nodoBotonAdd = document.createElement("button");
-        nodoBotonAdd.classList.add("btn", "btn-light", "btn-outline-dark", "mt-auto");
-        nodoBotonAdd.textContent = 'Agregar al Carrito';
-        nodoBotonAdd.setAttribute("marcador", item.id)  
-        nodoBotonAdd.addEventListener("click", carritoDeCompras)
-       
-
-    //Se unifica todo la tarjeta
-    productosDOM.appendChild(nodo);
-    nodo.appendChild(nodoCard);
-    nodoCard.appendChild(nodoCardImagen);
-    nodoCard.appendChild(nodoCardBody);
-    nodoCardBody.appendChild(nodoCardText);
-    nodoCardText.appendChild(nodoCardTitle);
-        nodoCardText.appendChild(nodoCardStar);
-        nodoCardText.appendChild(nodoCardTalla);
-        nodoCardTalla.appendChild(tallasElegir);
-            nodoCardTalla.appendChild(tallasElegir1);
-            nodoCardTalla.appendChild(tallasElegir2);
-            nodoCardTalla.appendChild(tallasElegir3);
-            nodoCardTalla.appendChild(tallasElegir4);
-            nodoCardTalla.appendChild(tallasElegir5);
-            nodoCardTalla.appendChild(tallasElegir6);
-    nodoCardText.appendChild(nodoCardPrecio);
-    nodoCard.appendChild(nodoBoton);
-    nodoBoton.appendChild(nodoBotonAdd);
-
-});
+mostrarProductos(productos)
 
 
     
@@ -471,71 +350,71 @@ function registroNewsletter() {
 
 
 
-const cart = [];
-const productCart = [];
+// const cart = [];
+// const productCart = [];
 
-//---> Agregar productos al carrito de compra
-function carritoDeCompras(event) {
-    // Añadimos el id a nuestra variable "carrito"
-    cart.push(event.target.getAttribute("marcador"));
-    console.log(cart);
+// //---> Agregar productos al carrito de compra
+// function carritoDeCompras(event) {
+//     // Añadimos el id a nuestra variable "carrito"
+//     cart.push(event.target.getAttribute("id"));
+//     console.log(cart);
 
-    //Hacer la suma total del costo de todos los pedidos y mostrarlo
-    const sumaProductos = cart.reduce((acumulador, item) => acumulador + item.length, 0);
-    document.getElementById("totalProductosCart").textContent=(sumaProductos);
-    console.log(sumaProductos);
+//     //Hacer la suma total del costo de todos los pedidos y mostrarlo
+//     const sumaProductos = cart.reduce((acumulador, item) => acumulador + item.length, 0);
+//     document.getElementById("totalProductosCart").textContent=(sumaProductos);
+//     console.log(sumaProductos);
 
 
-    crearCarrito()
-}
+//     crearCarrito()
+// }
 
-//---- //---- Añadir productos a carrito de compra
-function crearCarrito(){
-    // Creamos un nuevo array para no repetir los objetos
-    const carritoDuplicados = [...new Set(cart)];
-    // Comprobamos que no este duplicado los items del nuevo array con los ID del array de productos
-    carritoDuplicados.forEach(function(item){
-        const miProducto = productos.filter(function(itemProductos){
-            return itemProductos.id === parseInt(item);
-        });
+// //---- //---- Añadir productos a carrito de compra
+// function crearCarrito(){
+//     // Creamos un nuevo array para no repetir los objetos
+//     const carritoDuplicados = [...new Set(cart)];
+//     // Comprobamos que no este duplicado los items del nuevo array con los ID del array de productos
+//     carritoDuplicados.forEach(function(item){
+//         const miProducto = productos.filter(function(itemProductos){
+//             return itemProductos.id === parseInt(item);
+//         });
 
-    //log para revisar que se guarden los productos sin duplicar
-    console.log(carritoDuplicados);
+//     //log para revisar que se guarden los productos sin duplicar
+//     console.log(carritoDuplicados);
 
-    // Numero de veces que se repiten los productos
-    const numeroDeProductos = cart.reduce(function(acumulador, itemId){
-        // ¿Coincide las id? Incremento el contador, en caso contrario lo mantengo (Aqui uso ?: para hacer valer las condiciones)
-        return itemId === item ? acumulador += 1: acumulador;}, 0);
-        //log para ver si cuentan los productos individualmente
-        console.log(numeroDeProductos);
+//     // Numero de veces que se repiten los productos
+//     const numeroDeProductos = cart.reduce(function(acumulador, itemId){
+//         // ¿Coincide las id? Incremento el contador, en caso contrario lo mantengo (Aqui uso ?: para hacer valer las condiciones)
+//         return itemId === item ? acumulador += 1: acumulador;}, 0);
+//         //log para ver si cuentan los productos individualmente
+//         console.log(numeroDeProductos);
 
-        console.log(carritoDuplicados.nombre);
+//         console.log(carritoDuplicados.nombre);
     
     
-    //Creamos los productos en la pagina "Cart.html"
-    const nodo = document.createElement("li");
-    nodo.classList.add("list-group-item", "mb-5");
-    nodo.textContent = `${numeroDeProductos} - ${miProducto[0].nombre} - $${miProducto[0].precio}`;
+//     //Creamos los productos en la pagina "Cart.html"
+//     const nodo = document.createElement("li");
+//     nodo.classList.add("list-group-item", "mb-5");
+//     nodo.textContent = `${numeroDeProductos} - ${miProducto[0].nombre} - $${miProducto[0].precio}`;
 
-    const botonBorrar = document.createElement("button");
-    botonBorrar.classList.add("btn", "btn-danger");
-    botonBorrar.textContent= "Eliminar";
-    botonBorrar.dataset.item = item;
-    botonBorrar.addEventListener("click", borrarProductoCarrito);
+//     const botonBorrar = document.createElement("button");
+//     botonBorrar.classList.add("btn", "btn-danger");
+//     botonBorrar.textContent= "Eliminar";
+//     botonBorrar.dataset.item = item;
+//     botonBorrar.addEventListener("click", borrarProductoCarrito);
 
-    nodo.appendChild(botonBorrar);
-    carritoDOM.appendChild(nodo);
+//     nodo.appendChild(botonBorrar);
+//     carritoDOM.appendChild(nodo);
 
-    });
+//     });
     
-} 
+// } 
 
-function borrarProductoCarrito(evento) {
-    const id = evento.target.dataset.item;
-    // Borramos todos los productos
-    carrito = cart.filter((cartId) => {
-        return cartId !== id;
-    });
-    // volvemos a renderizar
-    crearCarrito();
-}
+// function borrarProductoCarrito(evento) {
+//     const id = evento.target.dataset.item;
+//     // Borramos todos los productos
+//     carrito = cart.filter((cartId) => {
+//         return cartId !== id;
+//     });
+//     // volvemos a renderizar
+//     crearCarrito();
+// }
