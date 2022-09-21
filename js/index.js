@@ -51,7 +51,6 @@ const mostrarProductos = (productos) => {
     const boton = document.getElementById(`boton${producto.id}`)
     boton.addEventListener('click', () => {
         carritoIndex(producto.id)
-        alert(`Se agrego el producto ${producto.nombre}`)
     })
 
     });
@@ -227,73 +226,3 @@ function registroNewsletter() {
     
 }
 
-
-
-// const cart = [];
-// const productCart = [];
-
-// //---> Agregar productos al carrito de compra
-// function carritoDeCompras(event) {
-//     // Añadimos el id a nuestra variable "carrito"
-//     cart.push(event.target.getAttribute("id"));
-//     console.log(cart);
-
-//     //Hacer la suma total del costo de todos los pedidos y mostrarlo
-//     const sumaProductos = cart.reduce((acumulador, item) => acumulador + item.length, 0);
-//     document.getElementById("totalProductosCart").textContent=(sumaProductos);
-//     console.log(sumaProductos);
-
-
-//     crearCarrito()
-// }
-
-// //---- //---- Añadir productos a carrito de compra
-// function crearCarrito(){
-//     // Creamos un nuevo array para no repetir los objetos
-//     const carritoDuplicados = [...new Set(cart)];
-//     // Comprobamos que no este duplicado los items del nuevo array con los ID del array de productos
-//     carritoDuplicados.forEach(function(item){
-//         const miProducto = productos.filter(function(itemProductos){
-//             return itemProductos.id === parseInt(item);
-//         });
-
-//     //log para revisar que se guarden los productos sin duplicar
-//     console.log(carritoDuplicados);
-
-//     // Numero de veces que se repiten los productos
-//     const numeroDeProductos = cart.reduce(function(acumulador, itemId){
-//         // ¿Coincide las id? Incremento el contador, en caso contrario lo mantengo (Aqui uso ?: para hacer valer las condiciones)
-//         return itemId === item ? acumulador += 1: acumulador;}, 0);
-//         //log para ver si cuentan los productos individualmente
-//         console.log(numeroDeProductos);
-
-//         console.log(carritoDuplicados.nombre);
-    
-    
-//     //Creamos los productos en la pagina "Cart.html"
-//     const nodo = document.createElement("li");
-//     nodo.classList.add("list-group-item", "mb-5");
-//     nodo.textContent = `${numeroDeProductos} - ${miProducto[0].nombre} - $${miProducto[0].precio}`;
-
-//     const botonBorrar = document.createElement("button");
-//     botonBorrar.classList.add("btn", "btn-danger");
-//     botonBorrar.textContent= "Eliminar";
-//     botonBorrar.dataset.item = item;
-//     botonBorrar.addEventListener("click", borrarProductoCarrito);
-
-//     nodo.appendChild(botonBorrar);
-//     carritoDOM.appendChild(nodo);
-
-//     });
-    
-// } 
-
-// function borrarProductoCarrito(evento) {
-//     const id = evento.target.dataset.item;
-//     // Borramos todos los productos
-//     carrito = cart.filter((cartId) => {
-//         return cartId !== id;
-//     });
-//     // volvemos a renderizar
-//     crearCarrito();
-// }
