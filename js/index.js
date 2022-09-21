@@ -54,7 +54,7 @@ const mostrarProductos = (productos) => {
         carritoIndex(producto.id)
         alert(`Se agrego el producto ${producto.nombre}`)
     })
-    
+
     });
     
 }
@@ -62,7 +62,6 @@ const mostrarProductos = (productos) => {
 mostrarProductos(productos)
 
 
-    
 
 //----------> Funcion seleccionar productos
 function selecccionarProductos() {
