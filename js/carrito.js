@@ -11,6 +11,8 @@ const totalPrecio = document.getElementById("totalPrecio");
 const totalProductosCart = document.getElementById("totalProductosCart");
 const totalPrecioCart = document.getElementById("totalPrecioCart")
 
+
+
 //-----------> Cargar carrito desde el localStorage
 document.addEventListener("DOMContentLoaded", () =>{
     if(localStorage.getItem("carrito")){
@@ -28,7 +30,7 @@ const addCarrito = (productoId) => {
             const cambiarCantidad = cart.map (item => {
                 if (item.id === productoId){
                     item.cantidad++;
-                    item.precio = item.precio * item.cantidad;
+                    // item.precio = item.precio * item.cantidad;
                 }
             })
         } else {
@@ -50,13 +52,14 @@ const renderProductosCart = () => {
         const listaProducto = document.createElement("tr");
         //html del producto que se agregara
         console.log(cart);
+        let nuevoPrecio = producto.precio * producto.cantidad;
         listaProducto.innerHTML = `
                                     <td class="w-25">
                                         <img class="img-fluid img-thumbnail" src="${producto.imagen}" alt="${producto.nombre}">
                                     </td>
                                     <td>${producto.nombre}</td>
                                     <td>${producto.cantidad}</td>
-                                    <td>$${producto.precio}</td>
+                                    <td>$${nuevoPrecio}</td>
                                     <td><button class="btn btn-danger" id="eliminar${producto.id}">Eliminar</button></td>
                                     `
     contadorCart.appendChild(listaProducto)
@@ -70,19 +73,21 @@ const renderProductosCart = () => {
         botonEliminar.addEventListener('click', () => {
             eliminarProducto(producto.id)
         })
+
+            
+            //Se actualizan los textos del carrito de compra
+            let actualizarPrecio = cart.reduce((acumulador, item) => acumulador + item.precio, 0);
+            let actualizarCantidad = cart.reduce((acumulador, item) => acumulador + item.cantidad, 0);
+
+            //Se actualiza los valores que se muestra en la seccion de carrito de compra
+            totalProductos.innerText = actualizarCantidad;
+            totalPrecio.innerText = (`$${actualizarPrecio}`);
+
+            //Se actualiza los valores que muestra en la parte superior de carrito de compra
+            totalProductosCart.innerText = actualizarCantidad;
+            totalPrecioCart.innerText = (`$${actualizarPrecio}`);
     })
 
-    //Se actualizan los textos del carrito de compra
-    let actualizarPrecio = cart.reduce((acumulador, item) => acumulador + item.precio, 0);
-    let actualizarCantidad = cart.reduce((acumulador, item) => acumulador + item.cantidad, 0);
-
-    //Se actualiza los valores que se muestra en la seccion de carrito de compra
-    totalProductos.innerText = actualizarCantidad;
-    totalPrecio.innerText = (`$${actualizarPrecio}`);
-
-    //Se actualiza los valores que muestra en la parte superior de carrito de compra
-    totalProductosCart.innerText = actualizarCantidad;
-    totalPrecioCart.innerText = (`$${actualizarPrecio}`);
 }
 
 
@@ -101,6 +106,16 @@ const eliminarProducto = (productoId) => {
 emptyCart.addEventListener("click", () => {
     //Se limpia el array del carrito
     cart = [];
+    localStorage.clear();
+    console.log(localStorage);
+
+    //Se actualiza los valores para que no muestre nada en el contenedor de carrito
+    totalProductos.innerText = "";
+    totalPrecio.innerText = "";
+    //Se actualiza los valores para que no muestre nada en la parte superior
+    totalProductosCart.innerText = "0";
+    totalPrecioCart.innerText = "00.";
+
     //Se actualiza el carrito de compra
     renderProductosCart();
 })
