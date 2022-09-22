@@ -6,10 +6,13 @@ const contadorCart = document.getElementById("cartShop");
 const emptyCart = document.getElementById("emptyCart");
 //Const para modificar los valores del carrito de compra
 const totalProductos = document.getElementById("totalProductos");
-const totalPrecio = document.getElementById("totalPrecio");
+const totalPrecio = document.querySelector('.totalPrecio');
 //Const para modificar los valores del carrito de compra superior izquierdo
 const totalProductosCart = document.getElementById("totalProductosCart");
-const totalPrecioCart = document.getElementById("totalPrecioCart")
+const totalPrecioCart = document.querySelector('.totalPrecioCart')
+
+
+
 
 
 
@@ -76,22 +79,39 @@ const renderProductosCart = () => {
 
             
             //Se actualizan los textos del carrito de compra
-            let actualizarPrecio = cart.reduce((acumulador, item) => acumulador + item.precio, 0);
             let actualizarCantidad = cart.reduce((acumulador, item) => acumulador + item.cantidad, 0);
 
             //Se actualiza los valores que se muestra en la seccion de carrito de compra
             totalProductos.innerText = actualizarCantidad;
-            totalPrecio.innerText = (`$${actualizarPrecio}`);
+            // totalPrecio.innerText = (`$${actualizarPrecio}`);
 
             //Se actualiza los valores que muestra en la parte superior de carrito de compra
             totalProductosCart.innerText = actualizarCantidad;
-            totalPrecioCart.innerText = (`$${actualizarPrecio}`);
+            // totalPrecioCart.innerText = (`$${actualizarPrecio}`);
 
             
     })
 
+    calcularTotal()
+
 }
 
+//---------------> Calcular el valor total
+function calcularTotal() {
+    //Se crea una variable para contener los totales
+    let total = 0;
+    //se realiza una busqueda por el array cart
+    cart.forEach((item) => {
+        //se consigue el precio de cada item
+        const precio = item.precio
+        //se multiplica el precio por la cantidad de productos
+        total = total + precio * item.cantidad
+    })
+
+    totalPrecio.innerHTML = `${total}`
+    totalPrecioCart.innerHTML = `$${total}`
+
+}
 
 //----------> Boton Eliminar productos de carrito
 const eliminarProducto = (productoId) => {
@@ -118,10 +138,10 @@ function vaciarCarrito() {
 
     //Se actualiza los valores para que no muestre nada en el contenedor de carrito
     totalProductos.innerText = "";
-    totalPrecio.innerText = "";
+
     //Se actualiza los valores para que no muestre nada en la parte superior
     totalProductosCart.innerText = "0";
-    totalPrecioCart.innerText = "00.";
+
 
     //Se actualiza el carrito de compra
     renderProductosCart();
@@ -131,8 +151,12 @@ function vaciarCarrito() {
 
 //--------------> funcion en Boton para pagar y aplicar descuento por monto de compra
 function pagarDescuento() {
-    //Hacer la suma total del costo de todos los productos y mostrarlo en el index
-    const acumuladoTotal = cart.reduce((acumulador, item) => acumulador + item.precio, 0);
+    //Tomamos la misma funcion para calcularValor
+    let acumuladoTotal = 0;
+    cart.forEach((item) => {
+        const precio = item.precio
+        acumuladoTotal = acumuladoTotal + precio * item.cantidad
+    })
 
     console.log(acumuladoTotal);
 
@@ -168,7 +192,7 @@ function pagarDescuento() {
                 alert(`${ventaText}Total a pagar 🏷$${montoTotal}`);
 
             }else{
-                alert("Realiza tu pedido en el botón iniciar ");
+                alert("Agrega productos a tu carrito ");
         }
     
 }
