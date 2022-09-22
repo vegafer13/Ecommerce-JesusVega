@@ -13,9 +13,6 @@ const totalPrecioCart = document.querySelector('.totalPrecioCart')
 
 
 
-
-
-
 //-----------> Cargar carrito desde el localStorage
 document.addEventListener("DOMContentLoaded", () =>{
     if(localStorage.getItem("carrito")){
