@@ -108,7 +108,7 @@ function calcularTotal() {
         total = total + precio * item.cantidad
     })
 
-    totalPrecio.innerHTML = `${total}`
+    totalPrecio.innerHTML = `$${total}`
     totalPrecioCart.innerHTML = `$${total}`
 
 }
