@@ -35,7 +35,7 @@ const addCarrito = (productoId) => {
             })
         } else {
             //cuando se verifica que se encuentra un nuevo id, se agregara el producto por un push a cart
-            const producto = productos.find((producto) => producto.id == productoId )
+            const producto = productos.find((producto) => producto.id == productoId)
             cart.push(producto);  
         }
 
@@ -86,6 +86,8 @@ const renderProductosCart = () => {
             //Se actualiza los valores que muestra en la parte superior de carrito de compra
             totalProductosCart.innerText = actualizarCantidad;
             totalPrecioCart.innerText = (`$${actualizarPrecio}`);
+
+            
     })
 
 }
@@ -98,7 +100,8 @@ const eliminarProducto = (productoId) => {
     //Se encuentra y elimina del carrito
     const find = cart.indexOf(producto);
     cart.splice(find, 1);
-    if (find === 0) {
+    console.log(find);
+    if (cart.length === 0) {
         vaciarCarrito()
     }
     
