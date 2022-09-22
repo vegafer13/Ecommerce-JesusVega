@@ -50,7 +50,7 @@ const mostrarProductos = (productos) => {
     //Creamos un llamado de funcion por medio del boton, para que inicie una accion cada vez que le den clic al boton del producto
     const boton = document.getElementById(`boton${producto.id}`)
     boton.addEventListener('click', () => {
-        carritoIndex(producto.id)
+        addCarrito(producto.id)
     })
 
     });
@@ -59,54 +59,6 @@ const mostrarProductos = (productos) => {
 
 mostrarProductos(productos)
 
-
-//--------------> funcion en Boton para pagar y aplicar descuento por monto de compra
-function pagarDescuento() {
-    //Hacer la suma total del costo de todos los pedidos y mostrarlo en el index
-    const acumuladoTotal = carrito.reduce((acumulador, item) => acumulador + item.total, 0);
-
-    console.log(acumuladoTotal);
-
-    //Aplicar descuento por cada cierto monto de compra
-    // 0 - 500 = 0%
-    // 500 - 1500 = 5%
-    // 1500 - 5000 = 10%
-    // 5000 > = 15%
-
-    // let montoDeVenta = parseInt(prompt("Ingrese la venta total"));
-    let descuento = 0;
-    let ventaText = "";
-
-        if (acumuladoTotal > 0 ) {
-            if (acumuladoTotal >= 0 &&  acumuladoTotal < 500){
-                descuento = 0;
-                ventaText = `El valor de tu compra no se aplico un descuento 😪`;
-            }else if (acumuladoTotal >= 500 && acumuladoTotal < 1500){
-                descuento = 0.05;
-                ventaText = `El valor de tu compra se aplico un 5% de descuento,\nAhorraste $${acumuladoTotal * descuento} por tu compra🤑\n`; 
-            }else if (acumuladoTotal >= 1500 && acumuladoTotal <5000){
-                descuento = 0.10;
-                ventaText = `El valor de tu compra se aplico un 10% de descuento,\nAhorraste $${acumuladoTotal * descuento} por tu compra🤑\n`;
-            }else{
-                descuento = 0.15;
-                ventaText = `El valor de tu compra se aplico un 15% de descuento,\nAhorraste $${acumuladoTotal * descuento} por tu compra🤑\n`; 
-            };
-
-                let montoTotal = (acumuladoTotal - (acumuladoTotal * descuento));
-                alert(`${ventaText}Total a pagar 🏷$${montoTotal}`);
-
-            }else{
-                alert("Realiza tu pedido en el botón iniciar ");
-        }
-    
-}
-
-// ----------> eliminar pedidos / No terminado
-function vaciarCarrito() {
-    // Limpiamos los productos guardados
-    carrito = [];
-    console.log(carrito);
-}
 
 //----------> Funcion Registro de usuario (Boton Crear cuenta)
 function registroUser() {

@@ -1,108 +1,153 @@
 //Array vacio donde se envia las compras
-const cart = [];
-const cartLocalStorage = [];
+let cart = [];
+//Seccion donde esta el carrito
+const contadorCart = document.getElementById("cartShop");
+//Boton vaciar carrito
+const emptyCart = document.getElementById("emptyCart");
+//Const para modificar los valores del carrito de compra
+const totalProductos = document.getElementById("totalProductos");
+const totalPrecio = document.getElementById("totalPrecio");
+//Const para modificar los valores del carrito de compra superior izquierdo
+const totalProductosCart = document.getElementById("totalProductosCart");
+const totalPrecioCart = document.getElementById("totalPrecioCart")
 
-//Se crea una funcion para renderizar los productos seleccionados dentro del carrito de compra
-const carritoIndex = (productoId) => {
-    //se selecciona el id del contenedor donde se ingresaran los productos
-    const contenedorCarrito = document.getElementById("cartShop")
+//-----------> Cargar carrito desde el localStorage
+document.addEventListener("DOMContentLoaded", () =>{
+    if(localStorage.getItem("carrito")){
+        cart = JSON.parse(localStorage.getItem("carrito"));
+        renderProductosCart();
+    }
+})
 
-    const renderProductosCart = () => {
+//---------> Funcion para no repetir los productos agregados
+const addCarrito = (productoId) => {
         //Se realiza una busqueda del id del boton para que sea igual al id del array productos
-        let producto = productos.find( producto => producto.id == productoId )
+        const productoUnico = cart.some(item => item.id === productoId)
+        //Para q no se duplique los productos del carrito
+        if (productoUnico) {
+            const cambiarCantidad = cart.map (item => {
+                if (item.id === productoId){
+                    item.cantidad++;
+                    item.precio = item.precio * item.cantidad;
+                }
+            })
+        } else {
+            //cuando se verifica que se encuentra un nuevo id, se agregara el producto por un push a cart
+            const producto = productos.find((producto) => producto.id == productoId )
+            cart.push(producto);  
+        }
 
-        //cuando se verifica que se encuentra el id, se agregara el producto por un push a cart
-        cart.push(producto)
+        renderProductosCart()
+}
 
-            //Mostramos la suma de la cantidad de productos que se agregaron al carrito
-            const cantidadTotal = cart.reduce((acumulador, item) => {
-            return acumulador = acumulador + item.cantidad;
-            }, 0);
-            //Valor que se muestra en la seccion de carrito de compra
-            document.getElementById("totalProductos").textContent=(cantidadTotal);
-            //Se muestra en la parte superior de carrito de compra
-            document.getElementById("totalProductosCart").textContent=(cantidadTotal);
+//----------> Funcion para renderizar productos e imprimirlos en el carrito
+const renderProductosCart = () => {
+    //Se actualiza contenedor donde esta el carrito
+    contadorCart.innerHTML = "";
 
-            //Mostramos la suma del valor de todos los productos que se agregaron al carrito
-            const precioTotal = cart.reduce((acumulador, item) => {
-            return acumulador = acumulador + item.precio;
-            }, 0);
-            //Valor que se muestra en la seccion de carrito de compra
-            document.getElementById("totalPrecio").textContent=(`$${precioTotal}`);
-            //Se muestra en la parte superior de carrito de compra
-            document.getElementById("totalPrecioCart").textContent=(`$${precioTotal}`);
-
-        console.log(cart);
-
-        producto.cantidad = 1
-
-        let valorProducto = producto.precio * producto.cantidad;
-
-        //Creamos los productos en la seccion cart
-        let listaProducto = document.createElement("tr")
+    //se crea un forEach para que pase por todos los productos de array y los imprima en el carrito
+    cart.forEach((producto) => {
+        const listaProducto = document.createElement("tr");
         //html del producto que se agregara
-        listaProducto.innerHTML = `<th scope="row">${cart.length}</th>
+        console.log(cart);
+        listaProducto.innerHTML = `
                                     <td class="w-25">
                                         <img class="img-fluid img-thumbnail" src="${producto.imagen}" alt="${producto.nombre}">
                                     </td>
                                     <td>${producto.nombre}</td>
                                     <td>${producto.cantidad}</td>
-                                    <td>$${valorProducto}</td>
+                                    <td>$${producto.precio}</td>
                                     <td><button class="btn btn-danger" id="eliminar${producto.id}">Eliminar</button></td>
                                     `
-        
-        contenedorCarrito.appendChild(listaProducto)
+    contadorCart.appendChild(listaProducto)
 
-        //Agregamos localstorage
-        localStorage.setItem("ProductosCarritos", JSON.stringify(producto));
+        //Agregamos localstorage los productos que se mandaron a carrito
+        localStorage.setItem("carrito", JSON.stringify(cart));
         console.log(localStorage);
 
-    }
+        //Se crea el enlace del boton eliminar con la funcion eliminar producto
+        const botonEliminar = document.getElementById(`eliminar${producto.id}`)
+        botonEliminar.addEventListener('click', () => {
+            eliminarProducto(producto.id)
+        })
+    })
 
-    renderProductosCart()
+    //Se actualizan los textos del carrito de compra
+    let actualizarPrecio = cart.reduce((acumulador, item) => acumulador + item.precio, 0);
+    let actualizarCantidad = cart.reduce((acumulador, item) => acumulador + item.cantidad, 0);
 
+    //Se actualiza los valores que se muestra en la seccion de carrito de compra
+    totalProductos.innerText = actualizarCantidad;
+    totalPrecio.innerText = (`$${actualizarPrecio}`);
+
+    //Se actualiza los valores que muestra en la parte superior de carrito de compra
+    totalProductosCart.innerText = actualizarCantidad;
+    totalPrecioCart.innerText = (`$${actualizarPrecio}`);
 }
 
 
-//Funcion para recuperar la informacion que se guarda en el LocalStorage
-window.onload = function(){
-    if (localStorage.getItem("ProductosCarritos")) {
-        //si existe un producto en el local storage
-        let producto = JSON.parse(localStorage.getItem("ProductosCarritos"));
-        cartLocalStorage.push(producto)
-        console.log(cartLocalStorage);
+//----------> Boton Eliminar productos de carrito
+const eliminarProducto = (productoId) => {
+    //Se realiza una busqueda del id dentro del array cart
+    const producto = cart.find((producto) => producto.id == productoId)
+    //Se encuentra y elimina del carrito
+    const find = cart.indexOf(producto);
+    cart.splice(find, 1);
+    //Se actualiza el carrito de compra
+    renderProductosCart();
+}
 
-         //Mostramos la suma de la cantidad de productos que se agregaron al carrito
-         const cantidadTotal = cartLocalStorage.reduce((acumulador, item) => {
-            return acumulador = acumulador + item.cantidad;
-            }, 0);
-            //Valor que se muestra en la seccion de carrito de compra
-            document.getElementById("totalProductos").textContent=(cantidadTotal);
-            //Se muestra en la parte superior de carrito de compra
-            document.getElementById("totalProductosCart").textContent=(cantidadTotal);
-        
-            //Mostramos la suma del valor de todos los productos que se agregaron al carrito
-            const precioTotal = cartLocalStorage.reduce((acumulador, item) => {
-            return acumulador = acumulador + item.precio;
-            }, 0);
-            //Valor que se muestra en la seccion de carrito de compra
-            document.getElementById("totalPrecio").textContent=(`$${precioTotal}`);
-            //Se muestra en la parte superior de carrito de compra
-            document.getElementById("totalPrecioCart").textContent=(`$${precioTotal}`);
+//---------->Boton Vaciar Carrito
+emptyCart.addEventListener("click", () => {
+    //Se limpia el array del carrito
+    cart = [];
+    //Se actualiza el carrito de compra
+    renderProductosCart();
+})
 
-        
-        let listaProducto = document.createElement("tr")
-        //html del producto que se agregara
-        listaProducto.innerHTML = `<th scope="row">${cartLocalStorage.length}</th>
-                                    <td class="w-25">
-                                        <img class="img-fluid img-thumbnail" src="" alt="${cartLocalStorage.nombre}">
-                                    </td>
-                                    <td>${cartLocalStorage.cantidad}</td>
-                                    <td>${cartLocalStorage.nombre}</td>
-                                    <td>$${cartLocalStorage.precio}</td>
-                                    <td><button class="btn btn-danger" id="eliminar${cartLocalStorage.id}">Eliminar</button></td>
-                                    `
-    } else {
-        console.log("No hay productos guardados");
-    }
+
+
+
+//--------------> funcion en Boton para pagar y aplicar descuento por monto de compra
+function pagarDescuento() {
+    //Hacer la suma total del costo de todos los productos y mostrarlo en el index
+    const acumuladoTotal = cart.reduce((acumulador, item) => acumulador + item.precio, 0);
+
+    console.log(acumuladoTotal);
+
+    //Aplicar descuento por cada cierto monto de compra
+    // 0 - 500 = 0%
+    // 500 - 1500 = 5%
+    // 1500 - 5000 = 10%
+    // 5000 > = 15%
+
+    let descuento = 0;
+    let ventaText = "";
+
+        if (acumuladoTotal > 0 ) {
+            if (acumuladoTotal >= 0 &&  acumuladoTotal < 500){
+                descuento = 0;
+                ventaText = `El valor de tu compra no se aplico un descuento 😪`;
+            }else if (acumuladoTotal >= 500 && acumuladoTotal < 1500){
+                descuento = 0.05;
+                ventaText = `El valor de tu compra se aplico un 5% de descuento,\nAhorraste $${acumuladoTotal * descuento} por tu compra🤑\n`;
+
+            }else if (acumuladoTotal >= 1500 && acumuladoTotal <5000){
+                descuento = 0.10;
+                ventaText = `El valor de tu compra se aplico un 10% de descuento,\nAhorraste $${acumuladoTotal * descuento} por tu compra🤑\n`;
+            }else{
+                descuento = 0.15;
+                ventaText = `El valor de tu compra se aplico un 15% de descuento,\nAhorraste $${acumuladoTotal * descuento} por tu compra🤑\n`; 
+            };
+
+                //Se actualizan los precios del carrito de compra
+                let montoTotal = (acumuladoTotal - (acumuladoTotal * descuento));
+                totalPrecio.innerText = (`$${montoTotal}`);
+                totalPrecioCart.innerText = (`$${montoTotal}`);
+                alert(`${ventaText}Total a pagar 🏷$${montoTotal}`);
+
+            }else{
+                alert("Realiza tu pedido en el botón iniciar ");
+        }
+    
 }

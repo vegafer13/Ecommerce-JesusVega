@@ -106,7 +106,6 @@
                         <table class="table" >
                             <thead>
                             <tr>
-                                <th scope="col">#</th>
                                 <th scope="col">Imagen</th>
                                 <th scope="col">Nombre</th>
                                 <th scope="col">Cantidad</th>
@@ -115,9 +114,11 @@
                             </tr>
                             </thead>
                             <tbody id="cartShop">
+                            </tbody>
+                            <tbody>
                                 <tr>
+                                    <td colspan="2">Totales</td>
                                     <th scope="row" id="totalProductos"></th>
-                                    <td colspan="3">Total</td>
                                     <th id="totalPrecio"></th>
                                     <th scope="col"></th>
                                 </tr>
@@ -128,7 +129,7 @@
                         </div> -->
                     <div>
                         <button class="btn btn-primary mx-2" id="payCart" onclick="pagarDescuento()">Pagar</button>
-                        <button class="btn btn-danger mx-2" id="closeCart">Cerrar</button>
+                        <button class="btn btn-danger mx-2" id="emptyCart" >Vaciar Carrito</button>
                     </div>
                 </div>
             </div>
@@ -154,7 +155,6 @@
     <!-- Js Proyecto -->
     <script src="./js/productos.js"></script>
     <script src="./js/carrito.js"></script>
-    <script src="./js/modal.js "></script>
     <script src="./js/index.js"></script>
     <!-- Js bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
