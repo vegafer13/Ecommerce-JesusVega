@@ -98,12 +98,16 @@ const eliminarProducto = (productoId) => {
     //Se encuentra y elimina del carrito
     const find = cart.indexOf(producto);
     cart.splice(find, 1);
+    if (find === 0) {
+        vaciarCarrito()
+    }
+    
     //Se actualiza el carrito de compra
     renderProductosCart();
 }
 
 //---------->Boton Vaciar Carrito
-emptyCart.addEventListener("click", () => {
+function vaciarCarrito() {
     //Se limpia el array del carrito
     cart = [];
     localStorage.clear();
@@ -118,8 +122,7 @@ emptyCart.addEventListener("click", () => {
 
     //Se actualiza el carrito de compra
     renderProductosCart();
-})
-
+}
 
 
 
