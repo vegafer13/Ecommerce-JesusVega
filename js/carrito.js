@@ -1,7 +1,7 @@
 //Array vacio donde se envia las compras
 let cart = [];
 //Seccion donde esta el carrito
-const contadorCart = document.getElementById("cartShop");
+const itemCart = document.getElementById("cartShop");
 //Boton vaciar carrito
 const emptyCart = document.getElementById("emptyCart");
 //Const para modificar los valores del carrito de compra
@@ -15,10 +15,14 @@ const totalPrecioCart = document.querySelector('.totalPrecioCart')
 
 //-----------> Cargar carrito desde el localStorage
 document.addEventListener("DOMContentLoaded", () =>{
-    if(localStorage.getItem("carrito")){
-        cart = JSON.parse(localStorage.getItem("carrito"));
+    //Si se encuentra algo dentro de localStorage carrito, lo mandamos
+    localStorage.getItem("carrito") ? cart = JSON.parse(localStorage.getItem("carrito")) : console.log();
+        //Y renderizamos el carrito
         renderProductosCart();
-    }
+    // if(localStorage.getItem("carrito")){
+    //     cart = JSON.parse(localStorage.getItem("carrito"));
+    //     renderProductosCart();
+    // }
 })
 
 //---------> Funcion para no repetir los productos agregados
@@ -28,10 +32,11 @@ const addCarrito = (productoId) => {
         //Para q no se duplique los productos del carrito
         if (productoUnico) {
             const cambiarCantidad = cart.map (item => {
-                if (item.id === productoId){
-                    item.cantidad++;
-                    // item.precio = item.precio * item.cantidad;
-                }
+                //Si el id se repite, se agrega 1+ a cantidad
+                item.id === productoId && item.cantidad++;
+                // if (item.id === productoId){
+                //     item.cantidad++;
+                // }
             })
         } else {
             //cuando se verifica que se encuentra un nuevo id, se agregara el producto por un push a cart
@@ -44,8 +49,9 @@ const addCarrito = (productoId) => {
 
 //----------> Funcion para renderizar productos e imprimirlos en el carrito
 const renderProductosCart = () => {
+
     //Se actualiza contenedor donde esta el carrito
-    contadorCart.innerHTML = "";
+    itemCart.innerHTML = "";
 
     //se crea un forEach para que pase por todos los productos de array y los imprima en el carrito
     cart.forEach((producto) => {
@@ -62,7 +68,7 @@ const renderProductosCart = () => {
                                     <td>$${nuevoPrecio}</td>
                                     <td><button class="btn btn-danger" id="eliminar${producto.id}">Eliminar</button></td>
                                     `
-    contadorCart.appendChild(listaProducto)
+    itemCart.appendChild(listaProducto)
 
         //Agregamos localstorage los productos que se mandaron a carrito
         localStorage.setItem("carrito", JSON.stringify(cart));
@@ -118,9 +124,12 @@ const eliminarProducto = (productoId) => {
     const find = cart.indexOf(producto);
     cart.splice(find, 1);
     console.log(find);
-    if (cart.length === 0) {
-        vaciarCarrito()
-    }
+    //Si no hay productos dentro del carrito, se elimina todo
+    cart.length === 0 && vaciarCarrito();
+    // if (cart.length === 0) {
+    //     vaciarCarrito()
+    // }
+    
     
     //Se actualiza el carrito de compra
     renderProductosCart();
@@ -188,8 +197,8 @@ function pagarDescuento() {
                 totalPrecioCart.innerText = (`$${montoTotal}`);
                 alert(`${ventaText}Total a pagar 🏷$${montoTotal}`);
 
-            }else{
-                alert("Agrega productos a tu carrito ");
+        }else{
+            alert("Agrega productos a tu carrito ");
         }
     
 }
