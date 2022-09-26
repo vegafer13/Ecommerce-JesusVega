@@ -19,10 +19,6 @@ document.addEventListener("DOMContentLoaded", () =>{
     localStorage.getItem("carrito") ? cart = JSON.parse(localStorage.getItem("carrito")) : console.log();
         //Y renderizamos el carrito
         renderProductosCart();
-    // if(localStorage.getItem("carrito")){
-    //     cart = JSON.parse(localStorage.getItem("carrito"));
-    //     renderProductosCart();
-    // }
 })
 
 //---------> Funcion para no repetir los productos agregados
@@ -34,9 +30,6 @@ const addCarrito = (productoId) => {
             const cambiarCantidad = cart.map (item => {
                 //Si el id se repite, se agrega 1+ a cantidad
                 item.id === productoId && item.cantidad++;
-                // if (item.id === productoId){
-                //     item.cantidad++;
-                // }
             })
         } else {
             //cuando se verifica que se encuentra un nuevo id, se agregara el producto por un push a cart
@@ -126,10 +119,6 @@ const eliminarProducto = (productoId) => {
     console.log(find);
     //Si no hay productos dentro del carrito, se elimina todo
     cart.length === 0 && vaciarCarrito();
-    // if (cart.length === 0) {
-    //     vaciarCarrito()
-    // }
-    
     
     //Se actualiza el carrito de compra
     renderProductosCart();
