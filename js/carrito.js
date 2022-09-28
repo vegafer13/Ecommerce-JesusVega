@@ -111,35 +111,83 @@ function calcularTotal() {
 
 //----------> Boton Eliminar productos de carrito
 const eliminarProducto = (productoId) => {
-    //Se realiza una busqueda del id dentro del array cart
-    const producto = cart.find((producto) => producto.id == productoId)
-    //Se encuentra y elimina del carrito
-    const find = cart.indexOf(producto);
-    cart.splice(find, 1);
-    console.log(find);
-    //Si no hay productos dentro del carrito, se elimina todo
-    cart.length === 0 && vaciarCarrito();
-    
-    //Se actualiza el carrito de compra
-    renderProductosCart();
+//Se realiza una busqueda del id dentro del array cart
+const producto = cart.find((producto) => producto.id == productoId)
+    //Alert
+    Swal.fire({
+        title: '¿Estas seguro?',
+        text: `Se eliminara ${producto.nombre} del carrito`,
+        imageUrl: `${producto.imagen}`,
+        imageWidth: 200,
+        imageHeight: 200,
+        imageAlt: `${producto.nombre}`,
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si, eliminar'
+      }).then((result) => {
+        if (result.isConfirmed) {
+            //Se encuentra el producto
+            const find = cart.indexOf(producto);
+            //Se elimina el producto seleccionado
+            cart.splice(find, 1);
+            console.log(find);
+            //Si no hay productos dentro del carrito, se elimina todo
+            cart.length == 0 && limpiarArray();
+            //Se actualiza el carrito de compra
+            renderProductosCart();
+                //Alerta
+                Swal.fire({
+                    titleText: "Se elimino el producto",
+                    icon: "success",
+                })
+        }
+      })
+
+      
+   
 }
 
-//---------->Boton Vaciar Carrito
+//----------> Boton Vaciar Carrito
 function vaciarCarrito() {
-    //Se limpia el array del carrito
-    cart = [];
-    localStorage.clear();
-    console.log(localStorage);
+    Swal.fire({
+        title: '¿Estas seguro?',
+        text: "Se eliminaran todos los productos del carrito",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si, eliminar'
+      }).then((result) => {
+        if (result.isConfirmed) {
+            limpiarArray()
+                //Alerta
+                Swal.fire({
+                    titleText: "Se vacio tu carrito",
+                    icon: "success",
+                })
+        }
+      })
+    
+}
 
-    //Se actualiza los valores para que no muestre nada en el contenedor de carrito
-    totalProductos.innerText = "";
+//---------->Funcion limpiar array
+function limpiarArray() {
+     //Se limpia el array del carrito
+     cart = [];
+     localStorage.clear();
+     console.log(localStorage);
 
-    //Se actualiza los valores para que no muestre nada en la parte superior
-    totalProductosCart.innerText = "0";
+     //Se actualiza los valores para que no muestre nada en el contenedor de carrito
+     totalProductos.innerText = "";
 
+     //Se actualiza los valores para que no muestre nada en la parte superior
+     totalProductosCart.innerText = "0";
 
-    //Se actualiza el carrito de compra
-    renderProductosCart();
+     //Se actualiza el carrito de compra
+     renderProductosCart();
+   
 }
 
 
@@ -167,24 +215,44 @@ function pagarDescuento() {
         if (acumuladoTotal > 0 ) {
             if (acumuladoTotal >= 0 &&  acumuladoTotal < 500){
                 descuento = 0;
-                ventaText = `El valor de tu compra no se aplico un descuento 😪`;
+                     //Alerta
+                    Swal.fire({
+                        title: 'No se aplico descuento',
+                        text: `El valor de tu compra no se aplico un descuento 😪`,
+                        icon: "info",
+                    })
             }else if (acumuladoTotal >= 500 && acumuladoTotal < 1500){
                 descuento = 0.05;
-                ventaText = `El valor de tu compra se aplico un 5% de descuento,\nAhorraste $${acumuladoTotal * descuento} por tu compra🤑\n`;
-
+                     //Alerta
+                    Swal.fire({
+                        title: 'Conseguiste un 5% de descuento',
+                        text: `\nAhorraste $${acumuladoTotal * descuento} por tu compra🤑\n`,
+                        icon: "info",
+                    })
             }else if (acumuladoTotal >= 1500 && acumuladoTotal <5000){
                 descuento = 0.10;
-                ventaText = `El valor de tu compra se aplico un 10% de descuento,\nAhorraste $${acumuladoTotal * descuento} por tu compra🤑\n`;
+                     //Alerta
+                    Swal.fire({
+                        title: 'Conseguiste un 10% de descuento',
+                        text: `\nAhorraste $${acumuladoTotal * descuento} por tu compra🤑\n`,
+                        icon: "info",
+                    })
             }else{
                 descuento = 0.15;
-                ventaText = `El valor de tu compra se aplico un 15% de descuento,\nAhorraste $${acumuladoTotal * descuento} por tu compra🤑\n`; 
+                     //Alerta
+                    Swal.fire({
+                        title: 'Conseguiste un 15% de descuento',
+                        text: `\nAhorraste $${acumuladoTotal * descuento} por tu compra🤑\n`,
+                        icon: "info",
+                    })
+                // ventaText = `El valor de tu compra se aplico un 15% de descuento,\nAhorraste $${acumuladoTotal * descuento} por tu compra🤑\n`; 
             };
 
                 //Se actualizan los precios del carrito de compra
                 let montoTotal = (acumuladoTotal - (acumuladoTotal * descuento));
                 totalPrecio.innerText = (`$${montoTotal}`);
                 totalPrecioCart.innerText = (`$${montoTotal}`);
-                alert(`${ventaText}Total a pagar 🏷$${montoTotal}`);
+                // alert(`${ventaText}Total a pagar 🏷$${montoTotal}`);
 
         }else{
             alert("Agrega productos a tu carrito ");

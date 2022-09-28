@@ -51,6 +51,15 @@ const mostrarProductos = (productos) => {
     const boton = document.getElementById(`boton${producto.id}`)
     boton.addEventListener('click', () => {
         addCarrito(producto.id)
+        Swal.fire({
+            titleText: `Se agrego ${producto.nombre} a tu carrito`,
+            imageUrl: `${producto.imagen}`,
+            imageWidth: 200,
+            imageHeight: 200,
+            imageAlt: `${producto.nombre}`,
+            icon: "success",
+            confirmButtonText: "Ok!",
+          })
     })
 
     });
