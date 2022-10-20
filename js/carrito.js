@@ -146,8 +146,6 @@ const producto = cart.find((producto) => producto.id == productoId)
         }
       })
 
-      
-   
 }
 
 //----------> Boton Vaciar Carrito

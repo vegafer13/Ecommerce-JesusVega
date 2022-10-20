@@ -53,38 +53,3 @@ fetch("./js/productos.json")
         });
         });
 })
-
-
-// // -------------> Funcion Registro Newsletter (Button Registrarse)
-// function registroNewsletter() {
-//     //>Constructor de correos
-//     class UserNewsletter{
-//         constructor( emailUser){
-//           this.email = emailUser;
-//         }
-//     }
-    
-//     //>for para agregar correos registrados
-//     for (let index = 0; index < 1; index++){
-//         let emailUser = document.getElementById("emailNewsletter").value;
-//              if (emailUser.length > 1) {
-//                 console.log(emailUser);
-//                 //> for para mandar alerta de registro
-//                 alert(`Te registraste con el correo ${emailUser} 📧 \nPronto te llegaran nuestras promociones 🏷\n `);
-//              }else{
-//                 alert("Ingresa un correo")
-//                 emailUser = document.getElementById("emailNewsletter").value;
-//              }
-//         let emailNew = new UserNewsletter(emailUser);
-
-//         //> "push" para agregar correos a la cola
-//         nuevoNewsletter.push(emailNew);
-
-        
-//     }
-
-    
-//     console.log(nuevoNewsletter);
-    
-// }
-

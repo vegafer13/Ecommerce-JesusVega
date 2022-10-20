@@ -14,25 +14,8 @@
     <nav class="navbar navbar-dark navbar-expand p-0 bg-dark">
     <div class="container-fluid flex-column flex-md-row">
         <ul class="navbar-nav d-md-flex mr-auto mt-4 my-md-3">
-            <li class="nav-item">
-                <button type="button" onclick="registroUser()" class="btn btn-primary">Crea tu cuenta</button>
-            </li>
             <li class="nav-item mx-3">
-                <button type="button" onclick="loginUsuario()" class="btn btn-primary">Login</button>
-            </li>
-            <li class="nav-item"><a class="nav-link d-none" href="#" data-abc="true">Tarjetas participantes</a></li>
-        </ul>
-        <ul class="navbar-nav d-flex align-items-center my-3 my-md-3">
-            <li class="nav-item">
-                <a href="#" class="nav-link d-flex align-items-center" data-abc="true"><span id="saludoUser"></span></a>
-            </li>
-            <li class="nav-item">
-                <div class="d-flex flex-row">
-                    <img src="./assets/imagen/user.png" class="rounded-circle" width="30">
-                </div>
-            </li>
-            <li class="nav-item">
-                <a href="#" class="nav-link d-flex align-items-center" data-abc="true"><span id="textUser">Usuario</span></a>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalForm">Contacto</button>
             </li>
         </ul>
       </div>
@@ -55,7 +38,9 @@
                <!-- Carrito de compra -->
                <div class="col-md-2">
                    <div class="d-flex d-none d-md-flex flex-row align-items-center">
-                       <span class="shop-bag"><i id="openCart" class="bi bi-cart-fill"></i></span>
+                        <button class="shop-bag" type="button" data-bs-toggle="modal" data-bs-target="#modalCart">
+                            <i id="openCart" class="bi bi-cart-fill"></i>
+                        </button>
                        <div class="d-flex flex-column ms-2">
                            <span class="qty">Productos <span id="totalProductosCart">0</span></span>
                            <span class="fw-bold totalPrecioCart">$00.00</span>
@@ -87,54 +72,96 @@
         <div class="jumbotron">
             <h1 class="display-4 m-auto">Sneakers Mx</h1>
             <hr class="my-4">
-            <!-- <a class="btn btn-primary btn-lg" href="#" role="button">Descubre tu par!</a> -->
         </div>
     <!-- end Jumbotron -->
     <!-- Productos -->
         <!-- Section-->
-        <section class="py-5 d-flex flex-column-reverse" >
+        <section class="py-5" >
             <!-- Lista de Productos -->
             <div class="container px-4 px-lg-5 mt-5">
+                <div>
+                    <h2>Productos</h2>
+                </div>
                 <div id="productCard" class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
                 </div>
             </div>
-
-            <!-- Carrito de compra -->
-            <div class="container px-1 px-lg-5 my-3 modal-container">
-                <div class="col col-md-8 m-auto justify-content-center text-center table-responsive">
-                    <h2 class="py-1">Carrito de compra</h2>
-                        <table class="table" >
-                            <thead>
-                            <tr>
-                                <th scope="col">Imagen</th>
-                                <th scope="col">Nombre</th>
-                                <th scope="col">Cantidad</th>
-                                <th scope="col">Precio</th>
-                                <th scope="col"></th>
-                            </tr>
-                            </thead>
-                            <tbody id="cartShop">
-                            </tbody>
-                            <tbody>
+        </section>
+    <!-- Div modal donde se agregan los productos -->
+    <div class="modal fade" id="modalCart" tabindex="-1" aria-hidden="true" aria-labelledby="modalTitle">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalTitle">Carrito de compras</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Carrito de compra -->
+                        <div class="col col-md-8 m-auto justify-content-center text-center table-responsive">
+                            <table class="table">
+                                <thead>
                                 <tr>
-                                    <td colspan="2">Totales</td>
-                                    <th scope="row" id="totalProductos"></th>
-                                    <th class="totalPrecio">$00.00</th>
+                                    <th scope="col">Imagen</th>
+                                    <th scope="col">Nombre</th>
+                                    <th scope="col">Cantidad</th>
+                                    <th scope="col">Precio</th>
                                     <th scope="col"></th>
                                 </tr>
-                            </tbody>
-                        </table>
-                        <!-- Lista de productos que se agreguen a carrito -->
-                        <!-- <div id="cartShop">
-                        </div> -->
-                    <div class="my-3">
-                        <button class="btn btn-primary mx-2" id="payCart" onclick="pagarDescuento()">Pagar</button>
-                        <button class="btn btn-danger mx-2" onclick="vaciarCarrito()" >Vaciar Carrito</button>
-                    </div>
+                                </thead>
+                                <tbody id="cartShop">
+                                </tbody>
+                                <tbody>
+                                    <tr>
+                                        <td colspan="2">Total</td>
+                                        <th scope="row" id="totalProductos"></th>
+                                        <th class="totalPrecio">$00.00</th>
+                                        <th scope="col"></th>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="payCart" onclick="pagarDescuento()">Pagar</button>
+                    <button class="btn btn-danger mx-2" onclick="vaciarCarrito()" >Vaciar Carrito</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                 </div>
             </div>
-        </section>
+        </div>
+    </div>
 
+    <!-- Div modal formulario -->
+    <div class="modal fade" id="modalForm" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Formulario de contacto</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="form">
+                        <div class="mb-3">
+                            <label class="form-label" for="from_name">Nombre</label>
+                            <input type="text" class="form-control" name="from_name" id="from_name" placeholder="Nombre" />
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="from_email">Email</label>
+                            <input type="text" class="form-control" name="from_email" id="from_email" placeholder="Email" />
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="from_phone">Telefono</label>
+                            <input type="text" class="form-control" name="from_phone" id="from_phone" placeholder="Telefono" />
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="message">Mensaje</label>
+                            <!-- <input  type="text" class="form-control"name="message" id="message" placeholder="Escribe tu mensaje" /> -->
+                            <textarea type="text" class="form-control" name="message" id="message" rows="3"></textarea>
+                        </div>
+                        <input class="btn btn-primary mx-2" type="submit" id="button" value="Enviar" onclick="formContact()" />
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
     </main>
     <!-- Footer-->
