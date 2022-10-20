@@ -12,45 +12,30 @@
 <body>
 <header class="section-header fixed-top">
     <nav class="navbar navbar-dark navbar-expand p-0 bg-dark">
-    <div class="container-fluid flex-column flex-md-row">
-        <ul class="navbar-nav d-md-flex mr-auto mt-4 my-md-3">
-            <li class="nav-item mx-3">
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalForm">Contacto</button>
-            </li>
-        </ul>
-      </div>
-     <!-- container barra busqueda y carrito -->
-    </nav>
-    <section class="header-main border-bottom bg-white">
-        <div class="container-fluid">
-           <div class="row p-2 pt-3 pb-3 d-flex align-items-center">
-                <!-- Logo de la empresa -->
-               <div class="col-md-2">
-                   <img  class="d-none d-md-flex" src="" width="100">
-               </div>
-               <div class="col-md-8">
-            <!-- Barra de busqueda -->
-            <div class="d-flex form-inputs">
-                <input class="form-control" type="text" placeholder="¿Que color buscas?...">
-                <i class="bx bx-search"></i>
+        <div class="container-fluid flex-column flex-md-row">
+            <div class="col-md-2">
+                <img  class="d-none d-md-flex mx-2" src="./assets/logo/kisspng-skate-shoe-sneakers-pattern-hot-global-trend-of-white-shoes-5a9e80cb157e16.9157627215203370990881.png" width="100">
             </div>
-               </div>
-               <!-- Carrito de compra -->
-               <div class="col-md-2">
-                   <div class="d-flex d-none d-md-flex flex-row align-items-center">
-                        <button class="shop-bag" type="button" data-bs-toggle="modal" data-bs-target="#modalCart">
-                            <i id="openCart" class="bi bi-cart-fill"></i>
-                        </button>
-                       <div class="d-flex flex-column ms-2">
-                           <span class="qty">Productos <span id="totalProductosCart">0</span></span>
-                           <span class="fw-bold totalPrecioCart">$00.00</span>
-                       </div>    
-                   </div>           
-               </div>
-           </div>
-        </div> 
-    </section>
-    <!-- Menu productos -->
+            <ul class="navbar-nav d-md-flex mr-auto mt-4 my-md-3">
+                <li class="nav-item mx-3">
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalForm">Contacto</button>
+                </li>
+            </ul>
+            <!-- Carrito de compra -->
+            <div class="col-md-2">
+                <div class="d-flex d-none d-md-flex flex-row align-items-center">
+                    <button class="shop-bag" type="button" data-bs-toggle="modal" data-bs-target="#modalCart">
+                        <i id="openCart" class="bi bi-cart-fill"></i>
+                    </button>
+                    <div class="d-flex flex-column ms-2 text-white">
+                        <span class="qty">Productos <span id="totalProductosCart">0</span></span>
+                        <span class="fw-bold totalPrecioCart">$00.00</span>
+                    </div>    
+                </div>           
+            </div>
+        </div>
+    </nav>
+    <!-- productos -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="container-fluid">
         <a class="navbar-brand d-md-none d-md-flex" href="#">Productos</a>
@@ -79,7 +64,7 @@
         <section class="py-5" >
             <!-- Lista de Productos -->
             <div class="container px-4 px-lg-5 mt-5">
-                <div>
+                <div class="py-2">
                     <h2>Productos</h2>
                 </div>
                 <div id="productCard" class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
