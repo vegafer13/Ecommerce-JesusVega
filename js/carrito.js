@@ -22,6 +22,7 @@ document.addEventListener("DOMContentLoaded", () =>{
 })
 
 //---------> Funcion para no repetir los productos agregados
+
 const addCarrito = (productoId) => {
         //Se realiza una busqueda del id del boton para que sea igual al id del array productos
         const productoUnico = cart.some(item => item.id === productoId)

@@ -1,0 +1,66 @@
+[
+    {
+        "id": 1,
+        "cantidad": 1,
+        "nombre": "Sneaker Blanco",
+        "precio": 700,
+        "imagen": "./assets/productos/producto-1.webp",
+        "color": "blanco"
+    },
+    {
+        "id": 2,
+        "cantidad": 1,
+        "nombre": "Sneaker Negro",
+        "precio": 750,
+        "imagen": "./assets/productos/producto-2.webp",
+        "color": "negro"
+    },
+    {
+        "id": 3,
+        "cantidad": 1,
+        "nombre": "Sneaker Gris",
+        "precio": 600,
+        "imagen": "./assets/productos/producto-3.webp",
+        "color": "gris"
+    },
+    {
+        "id": 4,
+        "cantidad": 1,
+        "nombre": "Sneaker Cafe",
+        "precio": 650,
+        "imagen": "./assets/productos/producto-4.webp",
+        "color": "cafe"
+    },
+    {
+        "id": 5,
+        "cantidad": 1,
+        "nombre": "Sneaker Rojo",
+        "precio": 500,
+        "imagen": "./assets/productos/producto-5.webp",
+        "color": "rojo"
+    },
+    {
+        "id": 6,
+        "cantidad": 1,
+        "nombre": "Sneaker Verde",
+        "precio": 400,
+        "imagen": "./assets/productos/producto-6.webp",
+        "color": "verde"
+    },
+    {
+        "id": 7,
+        "cantidad": 1,
+        "nombre": "Sneaker Rosa",
+        "precio": 450,
+        "imagen": "./assets/productos/producto-7.webp",
+        "color": "rosado"
+    },
+    {
+        "id": 8,
+        "cantidad": 1,
+        "nombre": "Sneaker Azul",
+        "precio": 600,
+        "imagen": "./assets/productos/producto-8.webp",
+        "color": "azul"
+    }
+]
