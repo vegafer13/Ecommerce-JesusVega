@@ -6,7 +6,7 @@ const nuevoNewsletter = [];
 
 
 const cardProductos = document.getElementById("productCard")
-fetch("../productos.json")
+fetch("./../js/productos.json")
 .then(response => response.json())
 .then(data => {
     data.forEach(producto => {
